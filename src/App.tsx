@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
-import { Header, Footer, Sidebar } from './components/layout';
+import { Header, Footer, Sidebar } from './components';
 import { LoginForm } from './components';
 
 const App: React.FC = () => {
