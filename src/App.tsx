@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Box, CssBaseline } from '@mui/material';
-import { Header, Footer, Sidebar } from './components';
+import { Box, CssBaseline, Fab } from '@mui/material';
+import { Header, Footer, Sidebar, Chatbot } from './components';
 import { LoginForm } from './components';
+import { Chat as ChatIcon } from '@mui/icons-material';
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isChatOpen, setIsChatOpen] = React.useState(false);
 
   const handleLogin = (email: string, password: string) => {
     // TODO: Implement actual authentication
@@ -54,6 +56,19 @@ const App: React.FC = () => {
           </Routes>
           <Footer />
         </Box>
+        {isChatOpen && <Chatbot />}
+        <Fab
+          color="primary"
+          aria-label="chat"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24
+          }}
+        >
+          <ChatIcon />
+        </Fab>
       </Box>
     </Router>
   );

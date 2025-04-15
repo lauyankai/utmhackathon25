@@ -20,13 +20,13 @@ export * from './onboarding/Department';
 export * from './onboarding/FAQ';
 
 // Common Components
-// export * from './common/Chatbot';
-// export * from './common/ProgressTracker';
-// export * from './common/LoadingSpinner';
-// export * from './common/ErrorBoundary';
+export * from './common/Chatbot';
+export * from './common/ProgressTracker';
+export * from './common/LoadingSpinner';
+export * from './common/ErrorBoundary';
 
 // Admin Components
-// export * from './admin/Dashboard';
-// export * from './admin/UserManagement';
-// export * from './admin/Analytics';
-// export * from './onboarding/DailyLife';
+export * from './admin/Dashboard';
+export * from './admin/UserManagement';
+export * from './admin/Analytics';
+export * from './onboarding/DailyLife';
