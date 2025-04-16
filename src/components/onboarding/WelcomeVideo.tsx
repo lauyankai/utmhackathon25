@@ -50,7 +50,7 @@ export const WelcomeVideo: React.FC = () => {
             autoPlay
             onEnded={handleVideoComplete}
           >
-            <source src="/welcome-video.mp4" type="video/mp4" />
+            <source src="/videos/onboarding.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}

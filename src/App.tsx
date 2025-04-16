@@ -1,9 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Box, CssBaseline, Fab } from '@mui/material';
-import { Header, Footer, Sidebar, Chatbot } from './components';
+import { Header, Footer, Sidebar, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo } from './components';
 import { LoginForm } from './components';
 import { Chat as ChatIcon } from '@mui/icons-material';
+import { CompanyCulture } from './components/onboarding/CompanyCulture';
+import { DailyLife } from './components/onboarding/DailyLife';
+import { Department} from './components/onboarding/Department';
+
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -43,16 +47,16 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/welcome-video" replace />} />
             {/* Add routes for each onboarding section */}
-            <Route path="/welcome-video" element={<div>Welcome Video</div>} />
-            <Route path="/company-culture" element={<div>Company Culture</div>} />
-            <Route path="/daily-life" element={<div>Daily Life</div>} />
-            <Route path="/role-overview" element={<div>Role Overview</div>} />
-            <Route path="/tech-stack" element={<div>Tech Stack</div>} />
-            <Route path="/tools" element={<div>Tools</div>} />
-            <Route path="/security" element={<div>Security</div>} />
-            <Route path="/team" element={<div>Team</div>} />
-            <Route path="/department" element={<div>Department</div>} />
-            <Route path="/faq" element={<div>FAQ</div>} />
+            <Route path="/welcome-video" element={<WelcomeVideo/>} />
+            <Route path="/company-culture" element={<CompanyCulture />} />
+            <Route path="/daily-life" element={<DailyLife/>} />
+            <Route path="/role-overview" element={<RoleOverview/>} />
+            <Route path="/tech-stack" element={<TechStack/>} />
+            <Route path="/tools" element={<Tools/>} />
+            <Route path="/security" element={<Security/>} />
+            <Route path="/team" element={<Team/>} />
+            <Route path="/department" element={<Department/>} />
+            <Route path="/faq" element={<FAQ/>} />
           </Routes>
           <Footer />
         </Box>
