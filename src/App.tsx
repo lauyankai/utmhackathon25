@@ -26,6 +26,7 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  
   return element;
 };
 
