@@ -1,8 +1,11 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, CardMedia, Chip, Stack } from '@mui/material';
+import { Box, Typography, Paper, Card, CardContent, Chip } from '@mui/material';
 import { Code as CodeIcon, Storage as StorageIcon, Cloud as CloudIcon } from '@mui/icons-material';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 
 export const TechStack: React.FC = () => {
+  useScrollCompletion('tech-stack');
+
   const frontendTech = [
     { name: 'React', description: 'UI Library for building user interfaces', category: 'Core' },
     { name: 'TypeScript', description: 'Typed superset of JavaScript', category: 'Language' },
@@ -24,15 +27,27 @@ export const TechStack: React.FC = () => {
     { name: 'Jenkins', description: 'CI/CD platform', category: 'CI/CD' }
   ];
 
-  const TechSection = ({ title, icon: Icon, technologies }) => (
+  interface Technology {
+    name: string;
+    description: string;
+    category: string;
+  }
+
+  interface TechSectionProps {
+    title: string;
+    icon: React.ElementType;
+    technologies: Technology[];
+  }
+
+  const TechSection: React.FC<TechSectionProps> = ({ title, icon: Icon, technologies }) => (
     <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
       <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
         <Icon sx={{ mr: 1 }} />
         {title}
       </Typography>
-      <Grid container spacing={2}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
         {technologies.map((tech, index) => (
-          <Grid item xs={12} sm={6} key={index}>
+          <Box key={index} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)' } }}>
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -50,9 +65,9 @@ export const TechStack: React.FC = () => {
                 />
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Paper>
   );
 
@@ -66,17 +81,11 @@ export const TechStack: React.FC = () => {
         Here's an overview of our primary technology stack:
       </Typography>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12}>
-          <TechSection title="Frontend Technologies" icon={CodeIcon} technologies={frontendTech} />
-        </Grid>
-        <Grid item xs={12}>
-          <TechSection title="Backend Technologies" icon={StorageIcon} technologies={backendTech} />
-        </Grid>
-        <Grid item xs={12}>
-          <TechSection title="DevOps & Infrastructure" icon={CloudIcon} technologies={devOpsTech} />
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <TechSection title="Frontend Technologies" icon={CodeIcon} technologies={frontendTech} />
+        <TechSection title="Backend Technologies" icon={StorageIcon} technologies={backendTech} />
+        <TechSection title="DevOps & Infrastructure" icon={CloudIcon} technologies={devOpsTech} />
+      </Box>
     </Box>
   );
 };

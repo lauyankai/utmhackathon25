@@ -1,8 +1,11 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { Box, Typography, Paper, Card, CardContent, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Work as WorkIcon, Timeline as TimelineIcon, School as SchoolIcon, Star as StarIcon } from '@mui/icons-material';
 
 export const RoleOverview: React.FC = () => {
+  useScrollCompletion('role-overview');
+
   const responsibilities = [
     'Develop and maintain high-quality software solutions',
     'Collaborate with cross-functional teams',
@@ -30,9 +33,9 @@ export const RoleOverview: React.FC = () => {
         Your Role at Our Company
       </Typography>
       
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        <Box sx={{ display: 'flex', gap: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+          <Paper elevation={2} sx={{ p: 3, flex: 1, minWidth: { xs: '100%', md: '0' } }}>
             <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
               <WorkIcon sx={{ mr: 1 }} />
               Key Responsibilities
@@ -48,10 +51,8 @@ export const RoleOverview: React.FC = () => {
               ))}
             </List>
           </Paper>
-        </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 3, height: '100%' }}>
+          <Paper elevation={2} sx={{ p: 3, flex: 1, minWidth: { xs: '100%', md: '0' } }}>
             <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
               <TimelineIcon sx={{ mr: 1 }} />
               Career Growth Path
@@ -67,28 +68,26 @@ export const RoleOverview: React.FC = () => {
               ))}
             </List>
           </Paper>
-        </Grid>
+        </Box>
 
-        <Grid item xs={12}>
-          <Paper elevation={2} sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <SchoolIcon sx={{ mr: 1 }} />
-              Performance Expectations
-            </Typography>
-            <Grid container spacing={2}>
-              {expectations.map((item, index) => (
-                <Grid item xs={12} sm={6} md={3} key={index}>
-                  <Card variant="outlined">
-                    <CardContent>
-                      <Typography variant="body1">{item}</Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Paper>
-        </Grid>
-      </Grid>
+        <Paper elevation={2} sx={{ p: 3 }}>
+          <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
+            <SchoolIcon sx={{ mr: 1 }} />
+            Performance Expectations
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+            {expectations.map((item, index) => (
+              <Box key={index} sx={{ flex: { xs: '1 1 100%', sm: '1 1 calc(50% - 8px)', md: '1 1 calc(25% - 12px)' } }}>
+                <Card variant="outlined">
+                  <CardContent>
+                    <Typography variant="body1">{item}</Typography>
+                  </CardContent>
+                </Card>
+              </Box>
+            ))}
+          </Box>
+        </Paper>
+      </Box>
     </Box>
   );
 };

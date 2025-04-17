@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, Typography, Paper, Card, CardContent, Avatar, Divider } from '@mui/material';
 import { Business as BusinessIcon, Group as GroupIcon, Code as CodeIcon, Support as SupportIcon } from '@mui/icons-material';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 
 export const Department: React.FC = () => {
+  useScrollCompletion('department');
+
   const departments = [
     {
       name: 'Engineering',

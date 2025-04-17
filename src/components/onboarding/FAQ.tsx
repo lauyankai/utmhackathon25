@@ -3,6 +3,7 @@ import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper, 
 import { ExpandMore as ExpandMoreIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useOnboardingProgress } from '../../store/onboardingProgress';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 
 export const FAQ: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ export const FAQ: React.FC = () => {
     completeSection('faq');
     navigate('/technical-section');
   };
+
+  useScrollCompletion('faq');
 
   const faqs = [
     {
