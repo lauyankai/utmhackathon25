@@ -4,7 +4,12 @@ import { useOnboardingProgress } from '../store/onboardingProgress';
 export const useScrollCompletion = (sectionId: string) => {
   const completeSection = useOnboardingProgress(state => state.completeSection);
 
+  // Disabled automatic section completion to allow exploration without changing progress
   useEffect(() => {
+    // This function is intentionally disabled for content development
+    // Original implementation is commented out below
+    
+    /*
     // Skip for welcome-video as it requires video completion
     if (sectionId === 'welcome-video') return;
 
@@ -26,5 +31,8 @@ export const useScrollCompletion = (sectionId: string) => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+    */
+    
+    // Empty effect during content development
   }, [sectionId, completeSection]);
 };
