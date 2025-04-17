@@ -11,8 +11,7 @@ export const WelcomeVideo: React.FC = () => {
   const handleVideoComplete = () => {
     setIsCompleted(true);
     setIsPlaying(false);
-    // Disabled automatic completion for content development
-    // completeSection('welcome-video');
+    completeSection('welcome-video');
   };
 
   return (

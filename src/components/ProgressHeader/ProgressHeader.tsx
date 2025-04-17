@@ -1,47 +1,49 @@
 import React from 'react';
-import { Box, Typography, LinearProgress, Paper } from '@mui/material';
+import { Box, Typography, LinearProgress } from '@mui/material';
 
 interface ProgressHeaderProps {
   title: string;
   completionPercentage: number;
 }
 
-export const ProgressHeader: React.FC<ProgressHeaderProps> = ({ title, completionPercentage }) => {
+export const ProgressHeader: React.FC<ProgressHeaderProps> = ({ completionPercentage }) => {
   return (
-    <Paper
-      elevation={0}
+    <Box
       sx={{
-        mb: 3,
-        p: 3,
+        position: 'fixed',
+        right: 24,
+        top: 88,
+        width: 120,
+        p: 2,
         borderRadius: 2,
-        backgroundColor: 'white',
-        border: '1px solid rgba(0, 0, 0, 0.08)',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.02)'
+        backgroundColor: 'background.paper',
+        boxShadow: 3,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1,
+        zIndex: 1000
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h5" sx={{ color: 'text.primary', fontWeight: 600 }}>
-          {title}
-        </Typography>
-        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 600 }}>
-          {Math.round(completionPercentage)}% Complete
-        </Typography>
-      </Box>
-      
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+        Progress
+      </Typography>
+      <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 600 }}>
+        {completionPercentage}%
+      </Typography>
       <LinearProgress
         variant="determinate"
         value={completionPercentage}
         sx={{
           width: '100%',
-          height: 8,
-          borderRadius: 4,
+          height: 4,
+          borderRadius: 2,
           backgroundColor: 'rgba(0, 0, 0, 0.03)',
           '& .MuiLinearProgress-bar': {
-            backgroundColor: 'primary.main',
-            borderRadius: 4
+            backgroundColor: 'primary.main'
           }
         }}
       />
-    </Paper>
+    </Box>
   );
 };

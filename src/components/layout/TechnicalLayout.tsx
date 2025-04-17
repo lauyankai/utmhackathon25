@@ -9,7 +9,7 @@ import {
   Analytics as AnalyticsIcon,
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Header, Footer, Chatbot, ProgressHeader } from '../../components';
+import { Header, Footer, Chatbot } from '../../components';
 import { useOnboardingProgress } from '../../store/onboardingProgress';
 
 const drawerWidth = 280;
@@ -25,7 +25,6 @@ export const TechnicalLayout: React.FC<{ children: React.ReactNode }> = ({ child
   const location = useLocation();
   const navigate = useNavigate();
   const [isChatOpen, setIsChatOpen] = React.useState(false);
-  const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
 
   const handleBackClick = () => {
     const currentSection = useOnboardingProgress.getState().getCurrentSection();
@@ -169,7 +168,6 @@ export const TechnicalLayout: React.FC<{ children: React.ReactNode }> = ({ child
           }
         }}
       >
-        <ProgressHeader title="Technical Assessment Progress" completionPercentage={completionPercentage} />
         {children}
         <Footer />
       </Box>
@@ -188,4 +186,4 @@ export const TechnicalLayout: React.FC<{ children: React.ReactNode }> = ({ child
       </Fab>
     </Box>
   );
-}; 
+};

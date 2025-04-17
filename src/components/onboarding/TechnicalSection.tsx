@@ -1,35 +1,8 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Grid,
-  Chip,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  List,
-  ListItem,
-  Paper,
-  Stepper,
-  Step,
-  StepLabel,
-  Avatar,
-  Divider
-} from '@mui/material';
-import {
-  Code as CodeIcon,
-  Assignment as TaskIcon,
-  Assessment as AssessmentIcon,
-  Timer as TimerIcon,
-  Star as StarIcon,
-  Psychology as AIIcon,
-  Lightbulb as InsightIcon,
-  TrendingUp as ProgressIcon
-} from '@mui/icons-material';
+import { Box, Typography,Card, CardContent, Grid, Chip, Button,Dialog, DialogTitle, DialogContent,
+  DialogActions, List, ListItem, Paper, Stepper, Step, StepLabel } from '@mui/material';
+import { Code as CodeIcon, Assignment as TaskIcon, Assessment as AssessmentIcon,
+  Timer as TimerIcon } from '@mui/icons-material';
 import { SkillAnalysis } from './SkillAnalysis';
 
 interface Project {
