@@ -10,6 +10,8 @@ import { Department } from './components/onboarding/Department';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
 import { TechnicalSection } from './components/onboarding/TechnicalSection';
 import { useOnboardingProgress } from './store/onboardingProgress';
+import { Welcome } from './components/onboarding/Welcome';
+import { WelcomeLanding } from './components/onboarding/WelcomeLanding';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
@@ -31,11 +33,17 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+  
+  const handleLogout = () => {
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('hasStartedOnboarding');
+    window.location.href = '/login';
+  };
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', background: 'linear-gradient(145deg, #f6f8fc 0%, #ffffff 100%)' }}>
       <CssBaseline />
-      <Header />
+      <Header onLogout={handleLogout} />
       <Sidebar />
       <Box
         component="main"
@@ -84,17 +92,35 @@ const AppContent: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
+  
+  const [hasStartedOnboarding, setHasStartedOnboarding] = React.useState(() => {
+    return localStorage.getItem('hasStartedOnboarding') === 'true';
+  });
 
   const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
   }, [isAuthenticated]);
+  
+  useEffect(() => {
+    // Listen for changes to hasStartedOnboarding in localStorage
+    const handleStorageChange = () => {
+      setHasStartedOnboarding(localStorage.getItem('hasStartedOnboarding') === 'true');
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   const handleLogin = (email: string, password: string) => {
     // TODO: Implement actual authentication
     console.log('Login attempt:', { email, password });
     setIsAuthenticated(true);
+    localStorage.removeItem('hasStartedOnboarding');
+    setHasStartedOnboarding(false);
   };
 
   if (!isAuthenticated) {
@@ -105,12 +131,23 @@ const AppContent: React.FC = () => {
       </Box>
     );
   }
+  
+  // Show welcome landing page if onboarding hasn't started yet
+  if (!hasStartedOnboarding) {
+    // Handle any route when onboarding hasn't started yet
+    return (
+      <Routes>
+        <Route path="*" element={<WelcomeLanding />} />
+      </Routes>
+    );
+  }
 
   return (
     <Routes>
       {/* Main Onboarding Routes */}
       <Route path="/" element={<MainLayout><Navigate to="/welcome-video" replace /></MainLayout>} />
       <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+      <Route path="/welcome" element={<MainLayout><ProtectedRoute path="/welcome" element={<Welcome />} /></MainLayout>} />
       <Route path="/welcome-video" element={<MainLayout><ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} /></MainLayout>} />
       <Route path="/company-culture" element={<MainLayout><ProtectedRoute path="/company-culture" element={<CompanyCulture />} /></MainLayout>} />
       <Route path="/daily-life" element={<MainLayout><ProtectedRoute path="/daily-life" element={<DailyLife />} /></MainLayout>} />

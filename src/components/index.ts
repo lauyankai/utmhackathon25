@@ -11,6 +11,7 @@ export * from './onboarding/WelcomeVideo';
 export * from './onboarding/CompanyCulture';
 export { DailyLife } from './onboarding/DailyLife';
 export * from './onboarding/RoleOverview';
+export * from './onboarding/WelcomeLanding';
 export * from './onboarding/TechStack';
 export * from './onboarding/Tools';
 export * from './onboarding/Security';
