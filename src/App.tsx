@@ -11,6 +11,8 @@ import { TechnicalLayout } from './components/layout/TechnicalLayout';
 import { TechnicalSection } from './components/onboarding/TechnicalSection';
 import { SkillAnalysis } from './components/onboarding/SkillAnalysis';
 import { AvailableProjects } from './components/onboarding/AvailableProjects';
+import { MyTasks } from './components/onboarding/MyTasks';
+import { Performance } from './components/onboarding/Performance';
 import { useOnboardingProgress } from './store/onboardingProgress';
 import { Welcome } from './components/onboarding/Welcome';
 import { WelcomeLanding } from './components/onboarding/WelcomeLanding';
@@ -179,8 +181,8 @@ const AppContent: React.FC = () => {
             <Route index element={<Navigate to="/technical-section/skill-analysis" replace />} />
             <Route path="skill-analysis" element={<SkillAnalysis onContinue={() => {}} />} />
             <Route path="projects" element={<AvailableProjects />} />
-            <Route path="my-tasks" element={<div>My Tasks</div>} />
-            <Route path="performance" element={<div>Performance</div>} />
+            <Route path="my-tasks" element={<MyTasks />} />
+            <Route path="performance" element={<Performance />} />
           </Routes>
         </TechnicalLayout>
       } />
