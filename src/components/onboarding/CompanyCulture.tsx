@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, Container } from '@mui/material';
+import { Box, Typography, Paper, Card, CardContent, Container } from '@mui/material';
 import { Diversity3 as DiversityIcon, Lightbulb as InnovationIcon, HandshakeOutlined as IntegrityIcon } from '@mui/icons-material';
 
 const values = [
@@ -42,25 +42,23 @@ export const CompanyCulture: React.FC = () => {
         <Typography variant="h5" gutterBottom>
           Our Core Values
         </Typography>
-        <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
           {values.map((value) => (
-            <Grid item xs={12} md={4} key={value.title}>
-              <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
-                  <Box sx={{ color: 'primary.main', mb: 2 }}>
-                    {value.icon}
-                  </Box>
-                  <Typography variant="h6" gutterBottom>
-                    {value.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {value.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card key={value.title} sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <CardContent sx={{ flexGrow: 1, textAlign: 'center' }}>
+                <Box sx={{ color: 'primary.main', mb: 2 }}>
+                  {value.icon}
+                </Box>
+                <Typography variant="h6" gutterBottom>
+                  {value.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {value.description}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
+        </Box>
 
         <Paper sx={{ p: 4 }}>
           <Typography variant="h5" gutterBottom>

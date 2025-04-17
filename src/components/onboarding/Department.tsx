@@ -75,7 +75,7 @@ export const Department: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
+    <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>        
       <Typography variant="h4" component="h1" gutterBottom>
         Department Overview
       </Typography>
@@ -84,9 +84,9 @@ export const Department: React.FC = () => {
         Here's an overview of our key departments and their responsibilities.
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
         {departments.map((dept, index) => (
-          <Grid item xs={12} md={6} key={index}>
+          <Box key={index} sx={{ flex: 1, minWidth: { xs: '100%', md: '0' } }}>
             <Paper elevation={2} sx={{ height: '100%' }}>
               <Box sx={{ p: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -110,51 +110,47 @@ export const Department: React.FC = () => {
 
                 <Divider sx={{ my: 2 }} />
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={6}>
-                    <Card variant="outlined" sx={{ height: '100%' }}>
-                      <CardContent>
-                        <Typography variant="subtitle1" gutterBottom>
-                          Teams
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Teams
+                      </Typography>
+                      {dept.teams.map((team, teamIndex) => (
+                        <Typography
+                          key={teamIndex}
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ mb: 0.5 }}
+                        >
+                          • {team}
                         </Typography>
-                        {dept.teams.map((team, teamIndex) => (
-                          <Typography
-                            key={teamIndex}
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{ mb: 0.5 }}
-                          >
-                            • {team}
-                          </Typography>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Card variant="outlined" sx={{ height: '100%' }}>
-                      <CardContent>
-                        <Typography variant="subtitle1" gutterBottom>
-                          Key Responsibilities
+                      ))}
+                    </CardContent>
+                  </Card>
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Typography variant="subtitle1" gutterBottom>
+                        Key Responsibilities
+                      </Typography>
+                      {dept.responsibilities.map((resp, respIndex) => (
+                        <Typography
+                          key={respIndex}
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ mb: 0.5 }}
+                        >
+                          • {resp}
                         </Typography>
-                        {dept.responsibilities.map((resp, respIndex) => (
-                          <Typography
-                            key={respIndex}
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{ mb: 0.5 }}
-                          >
-                            • {resp}
-                          </Typography>
-                        ))}
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                </Grid>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </Box>
               </Box>
             </Paper>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };

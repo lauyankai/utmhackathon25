@@ -31,19 +31,19 @@ export const Security: React.FC = () => {
       </Typography>
 
       <Alert severity="info" sx={{ mb: 4 }}>
-        Security is a top priority at our company. Please familiarize yourself with these guidelines and policies.
+        Security is a top priority at our company. Please familiarise yourself with these guidelines and policies.
       </Alert>
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ height: '100%', p: 3 }}>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <SecurityIcon sx={{ mr: 1 }} />
-              Security Policies
-            </Typography>
+      <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+        <Card sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, color: 'primary.main' }}>
+              <SecurityIcon sx={{ mr: 1, fontSize: 40 }} />
+              <Typography variant="h6">Security Policies</Typography>
+            </Box>
             <List>
               {securityPolicies.map((policy, index) => (
-                <ListItem key={index}>
+                <ListItem key={index} sx={{ px: 0 }}>
                   <ListItemIcon>
                     <LockIcon color="primary" />
                   </ListItemIcon>
@@ -51,18 +51,18 @@ export const Security: React.FC = () => {
                 </ListItem>
               ))}
             </List>
-          </Paper>
-        </Grid>
+          </CardContent>
+        </Card>
 
-        <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ height: '100%', p: 3 }}>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <ShieldIcon sx={{ mr: 1 }} />
-              Data Protection
-            </Typography>
+        <Card sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, color: 'primary.main' }}>
+              <ShieldIcon sx={{ mr: 1, fontSize: 40 }} />
+              <Typography variant="h6">Data Protection</Typography>
+            </Box>
             <List>
               {dataProtection.map((item, index) => (
-                <ListItem key={index}>
+                <ListItem key={index} sx={{ px: 0 }}>
                   <ListItemIcon>
                     <ShieldIcon color="primary" />
                   </ListItemIcon>
@@ -70,18 +70,18 @@ export const Security: React.FC = () => {
                 </ListItem>
               ))}
             </List>
-          </Paper>
-        </Grid>
+          </CardContent>
+        </Card>
 
-        <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ height: '100%', p: 3 }}>
-            <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center' }}>
-              <VerifiedUserIcon sx={{ mr: 1 }} />
-              Compliance
-            </Typography>
+        <Card sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, color: 'primary.main' }}>
+              <VerifiedUserIcon sx={{ mr: 1, fontSize: 40 }} />
+              <Typography variant="h6">Compliance</Typography>
+            </Box>
             <List>
               {compliance.map((item, index) => (
-                <ListItem key={index}>
+                <ListItem key={index} sx={{ px: 0 }}>
                   <ListItemIcon>
                     <VerifiedUserIcon color="primary" />
                   </ListItemIcon>
@@ -89,67 +89,57 @@ export const Security: React.FC = () => {
                 </ListItem>
               ))}
             </List>
-          </Paper>
-        </Grid>
+          </CardContent>
+        </Card>
+      </Box>
 
-        <Grid item xs={12}>
-          <Paper elevation={2} sx={{ p: 3 }}>
-            <Typography variant="h6" gutterBottom>
-              Important Security Resources
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Security Documentation
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Access detailed security guidelines and best practices
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Incident Response
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Learn about our security incident response procedures
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Security Training
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Access security awareness training materials
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography variant="subtitle1" gutterBottom>
-                      Compliance Certificates
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      View our current compliance certifications
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-      </Grid>
+      <Paper elevation={2} sx={{ p: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          Important Security Resources
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <Card variant="outlined" sx={{ flex: '1 1 250px' }}>
+            <CardContent>
+              <Typography variant="subtitle1" gutterBottom>
+                Security Documentation
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Access detailed security guidelines and best practices
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card variant="outlined" sx={{ flex: '1 1 250px' }}>
+            <CardContent>
+              <Typography variant="subtitle1" gutterBottom>
+                Incident Response
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Learn about our security incident response procedures
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card variant="outlined" sx={{ flex: '1 1 250px' }}>
+            <CardContent>
+              <Typography variant="subtitle1" gutterBottom>
+                Security Training
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Access security awareness training materials
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card variant="outlined" sx={{ flex: '1 1 250px' }}>
+            <CardContent>
+              <Typography variant="subtitle1" gutterBottom>
+                Compliance Certificates
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                View our current compliance certifications
+              </Typography>
+            </CardContent>
+          </Card>
+        </Box>
+      </Paper>
     </Box>
   );
 };
