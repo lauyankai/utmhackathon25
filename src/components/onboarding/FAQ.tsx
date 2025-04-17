@@ -11,7 +11,7 @@ export const FAQ: React.FC = () => {
 
   const handleNext = () => {
     completeSection('faq');
-    navigate('/technical-section');
+    navigate('/technical-intro');
   };
 
   useScrollCompletion('faq');

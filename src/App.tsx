@@ -14,6 +14,7 @@ import { AvailableProjects } from './components/onboarding/AvailableProjects';
 import { useOnboardingProgress } from './store/onboardingProgress';
 import { Welcome } from './components/onboarding/Welcome';
 import { WelcomeLanding } from './components/onboarding/WelcomeLanding';
+import { TechnicalIntro } from './components/onboarding/TechnicalIntro';
 import { Sidebar } from './components/Sidebar/Sidebar';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
@@ -97,6 +98,10 @@ const AppContent: React.FC = () => {
   const [hasStartedOnboarding, setHasStartedOnboarding] = React.useState(() => {
     return localStorage.getItem('hasStartedOnboarding') === 'true';
   });
+  
+  const [technicalSectionStarted, setTechnicalSectionStarted] = React.useState(() => {
+    return localStorage.getItem('technicalSectionStarted') === 'true';
+  });
 
   const location = useLocation();
 
@@ -108,6 +113,7 @@ const AppContent: React.FC = () => {
     // Listen for changes to hasStartedOnboarding in localStorage
     const handleStorageChange = () => {
       setHasStartedOnboarding(localStorage.getItem('hasStartedOnboarding') === 'true');
+      setTechnicalSectionStarted(localStorage.getItem('technicalSectionStarted') === 'true');
     };
     
     window.addEventListener('storage', handleStorageChange);
@@ -142,6 +148,11 @@ const AppContent: React.FC = () => {
       </Routes>
     );
   }
+  
+  // Show technical intro page if the user completed the FAQ section
+  if (location.pathname === '/technical-intro') {
+    return <TechnicalIntro />;
+  }
 
   return (
     <Routes>
@@ -171,6 +182,9 @@ const AppContent: React.FC = () => {
           </MainLayout>
         } 
       />
+
+      {/* Technical Introduction - This is now handled directly in the component rendering logic */}
+      {/* <Route path="/technical-intro" element={<Navigate to="/technical-intro" replace />} /> */}
 
       {/* Technical Assessment Routes */}
       <Route path="/technical-section/*" element={

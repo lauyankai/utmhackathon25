@@ -29,6 +29,7 @@ const sectionOrder = [
   'team',
   'department',
   'faq',
+  'technical-intro',
   'technical-section'
 ];
 
