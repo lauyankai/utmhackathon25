@@ -74,19 +74,10 @@ export const useOnboardingProgress = create<OnboardingProgressState>((set, get) 
   },
 
   canAccessSection: (sectionId: string) => {
-    // Temporarily allow access to technical section for testing
-    if (sectionId === 'technical-section') {
-      return true;
-    }
-
     const state = get();
     const targetSection = state.sections[sectionId];
-    const previousSections = sectionOrder
-      .slice(0, targetSection.order)
-      .map(id => state.sections[id]);
-
-    return targetSection.order === 0 || 
-           previousSections.every(section => section.completed);
+    
+    return targetSection !== undefined;
   },
 
   getCurrentSection: () => get().currentSection,
