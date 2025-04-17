@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, List, ListItem, ListItemIcon, ListItemText, Alert } from '@mui/material';
+import { Box, Typography, Paper, Card, CardContent, List, ListItem, ListItemIcon, ListItemText, Alert } from '@mui/material';
 import { Security as SecurityIcon, Lock as LockIcon, Shield as ShieldIcon, VerifiedUser as VerifiedUserIcon } from '@mui/icons-material';
 
 export const Security: React.FC = () => {

@@ -25,6 +25,9 @@ export * from './common/ProgressTracker';
 export * from './common/LoadingSpinner';
 export * from './common/ErrorBoundary';
 
+// Progress Components
+export * from './ProgressHeader/ProgressHeader';
+
 // Admin Components
 export * from './admin/Dashboard';
 export * from './admin/UserManagement';

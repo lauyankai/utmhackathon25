@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Box, CssBaseline, Fab } from '@mui/material';
-import { Header, Footer, Sidebar, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo } from './components';
+import { Header, Footer, Sidebar, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo, ProgressHeader } from './components';
 import { LoginForm } from './components';
 import { Chat as ChatIcon } from '@mui/icons-material';
 import { CompanyCulture } from './components/onboarding/CompanyCulture';
@@ -44,6 +44,7 @@ const App: React.FC = () => {
             flexDirection: 'column'
           }}
         >
+          <ProgressHeader title="Onboarding Progress" completionPercentage={60} />
           <Routes>
             <Route path="/" element={<Navigate to="/welcome-video" replace />} />
             {/* Add routes for each onboarding section */}

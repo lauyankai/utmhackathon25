@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, Avatar, Divider } from '@mui/material';
+import { Box, Typography, Paper, Card, CardContent, Avatar, Divider } from '@mui/material';
 import { Business as BusinessIcon, Group as GroupIcon, Code as CodeIcon, Support as SupportIcon } from '@mui/icons-material';
 
 export const Department: React.FC = () => {

@@ -1,46 +1,78 @@
-import React from 'react';
-import { Box, Typography, Paper, Grid, Card, CardContent, Avatar, Chip, IconButton, Stack } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Card, CardContent, Avatar, Chip, IconButton, Stack } from '@mui/material';
 import { Email as EmailIcon, LinkedIn as LinkedInIcon, GitHub as GitHubIcon } from '@mui/icons-material';
 
+interface TeamMember {
+  name: string;
+  role: string;
+  expertise: string[];
+  email: string;
+  linkedin: string;
+  github: string;
+  avatar: string;
+  githubAvatar?: string;
+}
+
 export const Team: React.FC = () => {
-  const teamMembers = [
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
     {
-      name: 'Sarah Johnson',
+      name: 'Lau Yan Kai',
       role: 'Engineering Director',
       expertise: ['Technical Leadership', 'System Architecture', 'Team Management'],
-      email: 'sarah.j@company.com',
-      linkedin: 'linkedin.com/in/sarahj',
-      github: 'github.com/sarahj',
+      email: 'lauyankai@graduate.utm.my',
+      linkedin: 'linkedin.com/in/lauyankai',
+      github: 'github.com/lauyankai',
       avatar: '🎯'
     },
     {
-      name: 'Michael Chen',
+      name: 'Lee Yin Shen',
       role: 'Senior Software Engineer',
       expertise: ['Frontend Development', 'UI/UX Design', 'Performance Optimization'],
-      email: 'michael.c@company.com',
+      email: 'leeyinshen2004@gmail.com',
       linkedin: 'linkedin.com/in/michaelc',
-      github: 'github.com/michaelc',
+      github: 'github.com/leeyinshen0818',
       avatar: '💻'
     },
     {
-      name: 'Emily Rodriguez',
+      name: 'Brendan Chia Yan Fei',
       role: 'Backend Team Lead',
       expertise: ['API Design', 'Database Architecture', 'Cloud Infrastructure'],
-      email: 'emily.r@company.com',
-      linkedin: 'linkedin.com/in/emilyr',
-      github: 'github.com/emilyr',
+      email: 'yan04@graduate.utm.my',
+      linkedin: 'linkedin.com/in/brendan',
+      github: 'github.com/Pegasus762',
       avatar: '🔧'
     },
     {
-      name: 'David Kim',
+      name: 'Choh Jing Yi',
       role: 'DevOps Engineer',
       expertise: ['CI/CD', 'Infrastructure Automation', 'Security'],
-      email: 'david.k@company.com',
-      linkedin: 'linkedin.com/in/davidk',
-      github: 'github.com/davidk',
+      email: 'chohjingyi@gmail.com',
+      linkedin: 'linkedin.com/in/chohjingyi',
+      github: 'github.com/chohjingyia23cs0296',
       avatar: '🛠️'
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    const fetchGithubAvatars = async () => {
+      const updatedMembers = await Promise.all(
+        teamMembers.map(async (member) => {
+          try {
+            const username = member.github.split('/').pop();
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            const data = await response.json();
+            return { ...member, githubAvatar: data.avatar_url };
+          } catch (error) {
+            console.error(`Error fetching GitHub avatar for ${member.name}:`, error);
+            return member;
+          }
+        })
+      );
+      setTeamMembers(updatedMembers);
+    };
+
+    fetchGithubAvatars();
+  }, []);
 
   return (
     <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
@@ -52,13 +84,30 @@ export const Team: React.FC = () => {
         and supporting your journey.
       </Typography>
 
-      <Grid container spacing={4}>
+      <Box sx={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: 4,
+        justifyContent: 'flex-start'
+      }}>
         {teamMembers.map((member, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Box
+            key={index}
+            sx={{
+              flexBasis: {
+                xs: '100%',
+                sm: 'calc(50% - 16px)',
+                md: 'calc(50% - 16px)'
+              },
+              minWidth: 0
+            }}
+          >
             <Card elevation={2}>
               <CardContent>
                 <Box sx={{ textAlign: 'center', mb: 2 }}>
                   <Avatar
+                    src={member.githubAvatar}
+                    alt={member.name}
                     sx={{
                       width: 80,
                       height: 80,
@@ -77,7 +126,7 @@ export const Team: React.FC = () => {
                   </Typography>
                 </Box>
 
-                <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 2 }}>
+                <Stack direction="row" spacing={1} flexWrap="wrap" sx={{ mb: 2, justifyContent: 'center' }}>
                   {member.expertise.map((skill, skillIndex) => (
                     <Chip
                       key={skillIndex}
@@ -114,9 +163,9 @@ export const Team: React.FC = () => {
                 </Stack>
               </CardContent>
             </Card>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 };
