@@ -13,14 +13,14 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
   const location = useLocation();
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+  const currentSection = useOnboardingProgress(state => state.getCurrentSection());
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   if (!canAccess) {
-    const currentSection = useOnboardingProgress(state => state.getCurrentSection());
-    return <Navigate to={`/${currentSection}`} state={{ from: location }} replace />;
+    return <Navigate to={`/${currentSection}`} state={{ from: location, locked: true }} replace />;
   }
 
   return element;
