@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Box, Typography, Paper, Button } from '@mui/material';
 import { PlayArrow as PlayIcon, CheckCircle as CheckIcon } from '@mui/icons-material';
+import { useOnboardingProgress } from '../../store/onboardingProgress';
 
 export const WelcomeVideo: React.FC = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const completeSection = useOnboardingProgress(state => state.completeSection);
 
   const handleVideoComplete = () => {
     setIsCompleted(true);
     setIsPlaying(false);
+    completeSection('welcome-video');
   };
 
   return (

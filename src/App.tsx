@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Box, CssBaseline, Fab } from '@mui/material';
 import { Header, Footer, Sidebar, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo, ProgressHeader } from './components';
@@ -12,6 +12,11 @@ import { useOnboardingProgress } from './store/onboardingProgress';
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
   const location = useLocation();
+  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
   if (!canAccess) {
     const currentSection = useOnboardingProgress(state => state.getCurrentSection());
@@ -22,14 +27,25 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
 };
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
+    return localStorage.getItem('isAuthenticated') === 'true';
+  });
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+
+  useEffect(() => {
+    localStorage.setItem('isAuthenticated', isAuthenticated.toString());
+  }, [isAuthenticated]);
 
   const handleLogin = (email: string, password: string) => {
     // TODO: Implement actual authentication
     console.log('Login attempt:', { email, password });
     setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('isAuthenticated');
   };
 
   if (!isAuthenticated) {
@@ -45,7 +61,7 @@ const App: React.FC = () => {
     <Router>
       <Box sx={{ display: 'flex', minHeight: '100vh', background: 'linear-gradient(145deg, #f6f8fc 0%, #ffffff 100%)' }}>
         <CssBaseline />
-        <Header />
+        <Header onLogout={handleLogout} />
         <Sidebar />
         <Box
           component="main"
@@ -72,6 +88,7 @@ const App: React.FC = () => {
           <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />
           <Routes>
             <Route path="/" element={<Navigate to="/welcome-video" replace />} />
+            <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
             <Route path="/welcome-video" element={<ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} />} />
             <Route path="/company-culture" element={<ProtectedRoute path="/company-culture" element={<CompanyCulture />} />} />
             <Route path="/daily-life" element={<ProtectedRoute path="/daily-life" element={<DailyLife />} />} />

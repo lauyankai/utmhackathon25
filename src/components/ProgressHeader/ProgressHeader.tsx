@@ -12,7 +12,7 @@ export const ProgressHeader: React.FC<ProgressHeaderProps> = ({ completionPercen
       sx={{
         position: 'fixed',
         right: 24,
-        top: 88, // Adjusted to account for header height
+        top: 88,
         width: 120,
         p: 2,
         borderRadius: 2,

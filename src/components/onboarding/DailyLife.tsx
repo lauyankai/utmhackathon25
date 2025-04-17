@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 import {
   Box,
   Typography,
@@ -19,6 +20,8 @@ import {
 } from '@mui/icons-material';
 
 export const DailyLife: React.FC = () => {
+  useScrollCompletion('daily-life');
+
   return (
     <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>

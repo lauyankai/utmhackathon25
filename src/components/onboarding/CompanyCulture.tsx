@@ -1,4 +1,5 @@
 import React from 'react';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 import { Box, Typography, Paper, Card, CardContent, Container } from '@mui/material';
 import { Diversity3 as DiversityIcon, Lightbulb as InnovationIcon, HandshakeOutlined as IntegrityIcon } from '@mui/icons-material';
 
@@ -21,6 +22,8 @@ const values = [
 ];
 
 export const CompanyCulture: React.FC = () => {
+  useScrollCompletion('company-culture');
+
   return (
     <Container maxWidth="lg">
       <Box sx={{ py: 4 }}>

@@ -21,6 +21,25 @@ export const Sidebar: React.FC = () => {
     { path: '/faq', label: 'FAQ' },
   ];
 
+  const handleNavigation = (path: string, isAccessible: boolean) => {
+    if (!isAccessible) {
+      // Don't navigate if section is not accessible
+      return;
+    }
+    const sectionId = path.substring(1);
+    const currentSectionId = location.pathname.substring(1);
+    
+    // Only allow navigation to the next section if current section is completed
+    const currentSection = useOnboardingProgress.getState().sections[currentSectionId];
+    const targetSection = useOnboardingProgress.getState().sections[sectionId];
+    
+    if (currentSection && targetSection && targetSection.order > currentSection.order && !currentSection.completed) {
+      return;
+    }
+    
+    navigate(path);
+  };
+
   return (
     <Drawer
       variant="permanent"
@@ -43,13 +62,14 @@ export const Sidebar: React.FC = () => {
           return (
             <ListItem key={path} disablePadding>
               <ListItemButton
-                onClick={() => isAccessible && navigate(path)}
+                onClick={() => handleNavigation(path, isAccessible)}
                 disabled={!isAccessible}
                 selected={isActive}
                 sx={{
                   '&.Mui-disabled': {
                     opacity: 0.6,
                     color: 'text.disabled',
+                    pointerEvents: 'none',
                   },
                 }}
               >
