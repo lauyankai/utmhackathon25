@@ -1,12 +1,13 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, ListItemButton } from '@mui/material';
+import { CheckCircle, Lock } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useOnboardingProgress } from '../../store/onboardingProgress';
 
-interface SidebarProps {
-  completedSections: Set<string>;
-}
-
-export const Sidebar: React.FC<SidebarProps> = ({ completedSections }) => {
+export const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const canAccessSection = useOnboardingProgress(state => state.canAccessSection);
   const sections = [
     { path: '/welcome-video', label: 'Welcome Video' },
     { path: '/company-culture', label: 'Company Culture' },
@@ -34,17 +35,39 @@ export const Sidebar: React.FC<SidebarProps> = ({ completedSections }) => {
       }}
     >
       <List>
-        {sections.map(({ path, label }) => (
-          <ListItem key={path}>
-            <ListItemText primary={label} />
-            {completedSections.has(path) && (
-              <ListItemIcon>
-                <CheckCircle color="success" />
-              </ListItemIcon>
-            )}
-          </ListItem>
-        ))}
+        {sections.map(({ path, label }) => {
+          const sectionId = path.substring(1);
+          const isAccessible = canAccessSection(sectionId);
+          const isActive = location.pathname === path;
+
+          return (
+            <ListItem key={path} disablePadding>
+              <ListItemButton
+                onClick={() => isAccessible && navigate(path)}
+                disabled={!isAccessible}
+                selected={isActive}
+                sx={{
+                  '&.Mui-disabled': {
+                    opacity: 0.6,
+                    color: 'text.disabled',
+                  },
+                }}
+              >
+                <ListItemText primary={label} />
+                {!isAccessible ? (
+                  <ListItemIcon sx={{ minWidth: 'auto' }}>
+                    <Lock fontSize="small" color="disabled" />
+                  </ListItemIcon>
+                ) : isActive && (
+                  <ListItemIcon sx={{ minWidth: 'auto' }}>
+                    <CheckCircle fontSize="small" color="success" />
+                  </ListItemIcon>
+                )}
+              </ListItemButton>
+            </ListItem>
+          );
+        })}
       </List>
     </Drawer>
   );
-}; 
+};

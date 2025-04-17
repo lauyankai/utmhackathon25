@@ -6,40 +6,44 @@ interface ProgressHeaderProps {
   completionPercentage: number;
 }
 
-export const ProgressHeader: React.FC<ProgressHeaderProps> = ({ title, completionPercentage }) => {
+export const ProgressHeader: React.FC<ProgressHeaderProps> = ({ completionPercentage }) => {
   return (
-    <Box sx={{ 
-      width: '100%', 
-      bgcolor: '#0a1929',
-      color: 'white',
-      p: 4,
-      mb: 3,
-      borderRadius: 1,
-      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/hexagon-pattern.png")',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}>
-      <Typography variant="h4" gutterBottom>
-        {title}
+    <Box
+      sx={{
+        position: 'fixed',
+        right: 24,
+        top: 88, // Adjusted to account for header height
+        width: 120,
+        p: 2,
+        borderRadius: 2,
+        backgroundColor: 'background.paper',
+        boxShadow: 3,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1,
+        zIndex: 1000
+      }}
+    >
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 500 }}>
+        Progress
       </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 2 }}>
-        <LinearProgress 
-          variant="determinate" 
-          value={completionPercentage} 
-          sx={{ 
-            flexGrow: 1,
-            height: 8,
-            borderRadius: 4,
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-            '& .MuiLinearProgress-bar': {
-              backgroundColor: '#1976d2'
-            }
-          }}
-        />
-        <Typography variant="body1" sx={{ minWidth: 65 }}>
-          {completionPercentage}% COMPLETE
-        </Typography>
-      </Box>
+      <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 600 }}>
+        {completionPercentage}%
+      </Typography>
+      <LinearProgress
+        variant="determinate"
+        value={completionPercentage}
+        sx={{
+          width: '100%',
+          height: 4,
+          borderRadius: 2,
+          backgroundColor: 'rgba(0, 0, 0, 0.03)',
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: 'primary.main'
+          }
+        }}
+      />
     </Box>
   );
 };
