@@ -3,7 +3,11 @@ import { AppBar, Toolbar, Typography, IconButton, Avatar, Box, Menu, MenuItem } 
 import { AccountCircle as AccountIcon, Notifications as NotificationsIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onLogout: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -16,7 +20,7 @@ export const Header: React.FC = () => {
   };
 
   const handleLogout = () => {
-    // TODO: Implement logout functionality
+    onLogout();
     handleClose();
     navigate('/login');
   };

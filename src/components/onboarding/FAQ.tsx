@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 
 export const FAQ: React.FC = () => {
+  useScrollCompletion('faq');
+
   const faqs = [
     {
       question: 'What is the typical work schedule?',
