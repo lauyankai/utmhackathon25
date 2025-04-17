@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -10,6 +10,11 @@ import {
   Button,
   Divider,
   LinearProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogContentText,
 } from '@mui/material';
 import {
   Assignment as AssignmentIcon,
@@ -19,8 +24,39 @@ import {
   AutoGraph as AutoGraphIcon,
   AccountTree as AccountTreeIcon,
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 export const AvailableProjects: React.FC = () => {
+  const navigate = useNavigate();
+  const [selectedTask, setSelectedTask] = useState<any>(null);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleStartAssessment = (project: any, task: any) => {
+    setSelectedTask({
+      projectId: project.id,
+      projectTitle: project.title,
+      department: project.department,
+      ...task
+    });
+    setOpenDialog(true);
+  };
+
+  const handleConfirmStart = () => {
+    // In a real app, this would make an API call to assign the task
+    // For now, we'll store it in localStorage as an example
+    const myTasks = JSON.parse(localStorage.getItem('myTasks') || '[]');
+    myTasks.push({
+      ...selectedTask,
+      status: 'In Progress',
+      startDate: new Date().toISOString(),
+      dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(), // 2 weeks from now
+    });
+    localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    
+    setOpenDialog(false);
+    navigate('/technical-section/my-tasks');
+  };
+
   const companyProjects = [
     {
       id: 1,
@@ -274,6 +310,7 @@ export const AvailableProjects: React.FC = () => {
                           variant="contained"
                           color="primary"
                           size="small"
+                          onClick={() => handleStartAssessment(project, task)}
                         >
                           Start Assessment
                         </Button>
@@ -286,6 +323,56 @@ export const AvailableProjects: React.FC = () => {
           </Paper>
         ))}
       </Stack>
+
+      {/* Confirmation Dialog */}
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        aria-labelledby="assessment-dialog-title"
+      >
+        <DialogTitle id="assessment-dialog-title">
+          Start Assessment Task
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            You are about to start the following assessment task:
+          </DialogContentText>
+          {selectedTask && (
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="subtitle1" gutterBottom>
+                {selectedTask.projectTitle} - {selectedTask.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Department: {selectedTask.department}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Level: {selectedTask.level}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Duration: {selectedTask.duration}
+              </Typography>
+              <Box sx={{ mt: 2 }}>
+                <Typography variant="body2">
+                  This task will be added to your "My Tasks" section. You will be able to:
+                </Typography>
+                <ul>
+                  <li>Upload your solution files</li>
+                  <li>Track your progress</li>
+                  <li>Submit for review when ready</li>
+                </ul>
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="inherit">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirmStart} variant="contained" color="primary">
+            Start Task
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }; 
