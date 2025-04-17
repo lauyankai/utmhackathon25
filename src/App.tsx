@@ -33,16 +33,11 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
-  
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('hasStartedOnboarding');
-    window.location.href = '/login';
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleLogout = () => {
-    localStorage.setItem('isAuthenticated', 'false');
     navigate('/login');
   };
 
