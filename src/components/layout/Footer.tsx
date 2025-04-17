@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Link, Stack } from '@mui/material';
+import { Box, Container, Typography, Link, Stack, Divider } from '@mui/material';
 
 export const Footer: React.FC = () => {
   return (
@@ -9,8 +9,8 @@ export const Footer: React.FC = () => {
         py: 3,
         px: 2,
         mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900]
+        borderTop: '1px solid rgba(0, 0, 0, 0.08)',
+        backgroundColor: 'white'
       }}
     >
       <Container maxWidth="lg">
@@ -20,15 +20,21 @@ export const Footer: React.FC = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} Company Name. All rights reserved.
-          </Typography>
-          <Stack direction="row" spacing={3}>
+          <Box>
+            <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 600, mb: 1 }}>
+              Company Onboarding Portal
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              © {new Date().getFullYear()} Company Name. All rights reserved.
+            </Typography>
+          </Box>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
             <Link
               href="#"
               color="inherit"
               underline="hover"
               variant="body2"
+              sx={{ fontWeight: 500 }}
             >
               Privacy Policy
             </Link>
@@ -37,6 +43,7 @@ export const Footer: React.FC = () => {
               color="inherit"
               underline="hover"
               variant="body2"
+              sx={{ fontWeight: 500 }}
             >
               Terms of Service
             </Link>
@@ -45,6 +52,7 @@ export const Footer: React.FC = () => {
               color="inherit"
               underline="hover"
               variant="body2"
+              sx={{ fontWeight: 500 }}
             >
               Contact Support
             </Link>

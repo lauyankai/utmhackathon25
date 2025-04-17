@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Box, CssBaseline, Fab } from '@mui/material';
-import { Header, Footer, Sidebar, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo, ProgressHeader } from './components';
+import { Header, Footer, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo, ProgressHeader } from './components';
 import { LoginForm } from './components';
 import { Chat as ChatIcon } from '@mui/icons-material';
 import { CompanyCulture } from './components/onboarding/CompanyCulture';
@@ -9,9 +9,12 @@ import { DailyLife } from './components/onboarding/DailyLife';
 import { Department } from './components/onboarding/Department';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
 import { TechnicalSection } from './components/onboarding/TechnicalSection';
+import { SkillAnalysis } from './components/onboarding/SkillAnalysis';
+import { AvailableProjects } from './components/onboarding/AvailableProjects';
 import { useOnboardingProgress } from './store/onboardingProgress';
 import { Welcome } from './components/onboarding/Welcome';
 import { WelcomeLanding } from './components/onboarding/WelcomeLanding';
+import { Sidebar } from './components/Sidebar/Sidebar';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
@@ -21,10 +24,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  if (!canAccess) {
-    return <Navigate to={`/${currentSection}`} state={{ from: location, locked: true }} replace />;
   }
 
   return element;
@@ -38,6 +37,12 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('hasStartedOnboarding');
     window.location.href = '/login';
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.setItem('isAuthenticated', 'false');
+    navigate('/login');
   };
 
   return (
@@ -175,13 +180,17 @@ const AppContent: React.FC = () => {
       <Route path="/technical-section/*" element={
         <TechnicalLayout>
           <Routes>
-            <Route index element={<Navigate to="/technical-section/projects" replace />} />
-            <Route path="projects" element={<TechnicalSection />} />
-            <Route path="my-tasks" element={<TechnicalSection />} />
-            <Route path="performance" element={<TechnicalSection />} />
+            <Route index element={<Navigate to="/technical-section/skill-analysis" replace />} />
+            <Route path="skill-analysis" element={<SkillAnalysis onContinue={() => {}} />} />
+            <Route path="projects" element={<AvailableProjects />} />
+            <Route path="my-tasks" element={<div>My Tasks</div>} />
+            <Route path="performance" element={<div>Performance</div>} />
           </Routes>
         </TechnicalLayout>
       } />
+      
+      {/* Catch-all route - redirect to welcome video if no other routes match */}
+      <Route path="*" element={<Navigate to="/welcome-video" replace />} />
     </Routes>
   );
 };

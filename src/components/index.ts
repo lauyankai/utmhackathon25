@@ -2,7 +2,6 @@
 export * from './auth/LoginForm';
 
 // Layout Components
-export * from './layout/Sidebar';
 export * from './layout/Header';
 export * from './layout/Footer';
 
@@ -33,4 +32,3 @@ export * from './ProgressHeader/ProgressHeader';
 export * from './admin/Dashboard';
 export * from './admin/UserManagement';
 export * from './admin/Analytics';
-export * from './onboarding/DailyLife';
