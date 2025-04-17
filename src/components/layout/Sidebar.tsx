@@ -10,28 +10,35 @@ import {
   Security as SecurityIcon,
   Group as TeamIcon,
   Domain as DepartmentIcon,
-  QuestionAnswer as FAQIcon
+  QuestionAnswer as FAQIcon,
+  ArrowForward as ArrowForwardIcon
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useOnboardingProgress } from '../../store/onboardingProgress';
 
 const drawerWidth = 280;
 
-const menuItems = [
-  { text: 'Welcome Video', icon: <VideoIcon />, path: '/welcome-video' },
-  { text: 'Company Culture', icon: <CultureIcon />, path: '/company-culture' },
-  { text: 'Daily Life', icon: <DailyLifeIcon />, path: '/daily-life' },
-  { text: 'Your Role', icon: <RoleIcon />, path: '/role-overview' },
-  { text: 'Tech Stack', icon: <TechStackIcon />, path: '/tech-stack' },
-  { text: 'Tools Overview', icon: <ToolsIcon />, path: '/tools' },
-  { text: 'Security & Compliance', icon: <SecurityIcon />, path: '/security' },
-  { text: 'Meet the Team', icon: <TeamIcon />, path: '/team' },
-  { text: 'Department Overview', icon: <DepartmentIcon />, path: '/department' },
-  { text: 'FAQ', icon: <FAQIcon />, path: '/faq' }
+const sections = [
+  { path: '/welcome-video', label: 'Welcome Video', icon: <VideoIcon /> },
+  { path: '/company-culture', label: 'Company Culture', icon: <CultureIcon /> },
+  { path: '/daily-life', label: 'Daily Life', icon: <DailyLifeIcon /> },
+  { path: '/role-overview', label: 'Role Overview', icon: <RoleIcon /> },
+  { path: '/tech-stack', label: 'Tech Stack', icon: <TechStackIcon /> },
+  { path: '/tools', label: 'Tools', icon: <ToolsIcon /> },
+  { path: '/security', label: 'Security', icon: <SecurityIcon /> },
+  { path: '/team', label: 'Team', icon: <TeamIcon /> },
+  { path: '/department', label: 'Department', icon: <DepartmentIcon /> },
+  { path: '/faq', label: 'FAQ', icon: <FAQIcon /> }
 ];
 
 export const Sidebar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+
+  const handleNextClick = () => {
+    navigate('/technical-section/projects');
+  };
 
   return (
     <Drawer
@@ -49,7 +56,13 @@ export const Sidebar: React.FC = () => {
         }
       }}
     >
-      <Box sx={{ overflow: 'auto', mt: 8 }}>
+      <Box sx={{ 
+        overflow: 'auto', 
+        mt: 8, 
+        display: 'flex', 
+        flexDirection: 'column',
+        height: 'calc(100% - 64px)' // Subtract header height
+      }}>
         <Typography 
           variant="h6" 
           sx={{ 
@@ -62,12 +75,13 @@ export const Sidebar: React.FC = () => {
         >
           Onboarding Guide
         </Typography>
-        <Box sx={{ px: 1 }}>
-          {menuItems.map((item) => {
+        
+        <Box sx={{ px: 1, flex: 1, overflowY: 'auto' }}>
+          {sections.map((item) => {
             const isSelected = location.pathname === item.path;
             return (
               <Button
-                key={item.text}
+                key={item.label}
                 onClick={() => navigate(item.path)}
                 fullWidth
                 startIcon={
@@ -98,10 +112,41 @@ export const Sidebar: React.FC = () => {
                   }
                 }}
               >
-                {item.text}
+                {item.label}
               </Button>
             );
           })}
+        </Box>
+
+        {/* Next button at the bottom */}
+        <Box sx={{ p: 2, borderTop: '1px solid rgba(0, 0, 0, 0.08)' }}>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            size="large"
+            endIcon={<ArrowForwardIcon />}
+            onClick={handleNextClick}
+            sx={{
+              py: 1.5,
+              borderRadius: 2,
+              boxShadow: 'none',
+              '&:hover': {
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
+              }
+            }}
+          >
+            Start Technical Assessment
+          </Button>
+          {completionPercentage < 100 && (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ display: 'block', textAlign: 'center', mt: 1 }}
+            >
+              Progress: {Math.round(completionPercentage)}% completed
+            </Typography>
+          )}
         </Box>
       </Box>
     </Drawer>

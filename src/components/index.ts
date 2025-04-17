@@ -17,6 +17,7 @@ export * from './onboarding/Security';
 export * from './onboarding/Team';
 export * from './onboarding/Department';
 export * from './onboarding/FAQ';
+export * from './onboarding/TechnicalSection';
 
 // Common Components
 export * from './common/Chatbot';
