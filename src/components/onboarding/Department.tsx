@@ -87,7 +87,17 @@ export const Department: React.FC = () => {
       <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
         {departments.map((dept, index) => (
           <Box key={index} sx={{ flex: 1, minWidth: { xs: '100%', md: '0' } }}>
-            <Paper elevation={2} sx={{ height: '100%' }}>
+            <Paper 
+              elevation={2} 
+              sx={{ 
+                height: '100%',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: (theme) => theme.shadows[4]
+                }
+              }}
+            >
               <Box sx={{ p: 3 }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <Avatar
@@ -95,7 +105,11 @@ export const Department: React.FC = () => {
                       bgcolor: 'primary.main',
                       width: 48,
                       height: 48,
-                      mr: 2
+                      mr: 2,
+                      transition: 'all 0.3s ease-in-out',
+                      '&:hover': {
+                        transform: 'rotate(10deg)'
+                      }
                     }}
                   >
                     {dept.icon}
@@ -111,7 +125,16 @@ export const Department: React.FC = () => {
                 <Divider sx={{ my: 2 }} />
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <Card variant="outlined">
+                  <Card 
+                    variant="outlined" 
+                    sx={{ 
+                      transition: 'all 0.2s ease-in-out',
+                      '&:hover': {
+                        borderColor: 'primary.main',
+                        backgroundColor: 'rgba(0, 0, 0, 0.01)'
+                      }
+                    }}
+                  >
                     <CardContent>
                       <Typography variant="subtitle1" gutterBottom>
                         Teams

@@ -1,6 +1,5 @@
 // Authentication Components
 export * from './auth/LoginForm';
-export * from './auth/SocialLogin';
 
 // Layout Components
 export * from './layout/Sidebar';

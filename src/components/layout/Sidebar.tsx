@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Typography } from '@mui/material';
+import { Drawer, Box, Typography, Button } from '@mui/material';
 import {
   PlayCircle as VideoIcon,
   Business as CultureIcon,
@@ -42,52 +42,67 @@ export const Sidebar: React.FC = () => {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#f5f5f5',
-          borderRight: '1px solid rgba(0, 0, 0, 0.12)'
+          backgroundColor: '#ffffff',
+          borderRight: '1px solid rgba(0, 0, 0, 0.08)',
+          boxShadow: '4px 0 8px rgba(0, 0, 0, 0.02)',
+          transition: 'all 0.3s ease-in-out'
         }
       }}
     >
       <Box sx={{ overflow: 'auto', mt: 8 }}>
-        <Typography variant="h6" sx={{ px: 3, py: 2, color: 'primary.main' }}>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            px: 3, 
+            py: 2, 
+            color: 'primary.main',
+            fontWeight: 600,
+            letterSpacing: '0.5px'
+          }}
+        >
           Onboarding Guide
         </Typography>
-        <List>
-          {menuItems.map((item) => (
-            <ListItem
-              button
-              key={item.text}
-              onClick={() => navigate(item.path)}
-              selected={location.pathname === item.path}
-              sx={{
-                '&.Mui-selected': {
-                  backgroundColor: 'primary.main',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: 'primary.dark'
-                  },
-                  '& .MuiListItemIcon-root': {
-                    color: 'white'
-                  }
-                },
-                '&:hover': {
-                  backgroundColor: 'rgba(0, 0, 0, 0.04)'
-                },
-                mx: 1,
-                borderRadius: 1
-              }}
-            >
-              <ListItemIcon
+        <Box sx={{ px: 1 }}>
+          {menuItems.map((item) => {
+            const isSelected = location.pathname === item.path;
+            return (
+              <Button
+                key={item.text}
+                onClick={() => navigate(item.path)}
+                fullWidth
+                startIcon={
+                  <Box
+                    component="span"
+                    sx={{
+                      color: isSelected ? 'white' : 'primary.main',
+                      display: 'flex',
+                      minWidth: 40
+                    }}
+                  >
+                    {item.icon}
+                  </Box>
+                }
                 sx={{
-                  minWidth: 40,
-                  color: location.pathname === item.path ? 'white' : 'primary.main'
+                  mb: 0.5,
+                  py: 1.5,
+                  borderRadius: 2,
+                  justifyContent: 'flex-start',
+                  color: isSelected ? 'white' : 'text.primary',
+                  backgroundColor: isSelected ? 'primary.main' : 'transparent',
+                  transition: 'all 0.2s ease-in-out',
+                  transform: isSelected ? 'scale(1.02)' : 'none',
+                  boxShadow: isSelected ? '0 2px 8px rgba(0, 0, 0, 0.15)' : 'none',
+                  '&:hover': {
+                    backgroundColor: isSelected ? 'primary.dark' : 'rgba(0, 0, 0, 0.04)',
+                    transform: 'scale(1.02)'
+                  }
                 }}
               >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
+                {item.text}
+              </Button>
+            );
+          })}
+        </Box>
       </Box>
     </Drawer>
   );

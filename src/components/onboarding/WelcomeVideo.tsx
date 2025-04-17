@@ -13,10 +13,10 @@ export const WelcomeVideo: React.FC = () => {
 
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', p: 3 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, color: 'primary.main' }}>
         Welcome to Our Company
       </Typography>
-      <Typography variant="subtitle1" color="text.secondary" paragraph>
+      <Typography variant="subtitle1" color="text.secondary" paragraph sx={{ opacity: 0.8 }}>
         Watch this short video to learn about our company's mission, values, and what you can expect during your onboarding journey.
       </Typography>
 
@@ -29,7 +29,13 @@ export const WelcomeVideo: React.FC = () => {
           height: 450,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          borderRadius: 2,
+          overflow: 'hidden',
+          transition: 'transform 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'scale(1.01)'
+          }
         }}
       >
         {!isPlaying && (
@@ -38,6 +44,17 @@ export const WelcomeVideo: React.FC = () => {
             size="large"
             startIcon={<PlayIcon />}
             onClick={() => setIsPlaying(true)}
+            sx={{
+              px: 4,
+              py: 2,
+              borderRadius: 3,
+              backgroundColor: 'primary.main',
+              '&:hover': {
+                backgroundColor: 'primary.dark',
+                transform: 'scale(1.05)'
+              },
+              transition: 'all 0.2s ease-in-out'
+            }}
           >
             Play Welcome Video
           </Button>
@@ -49,6 +66,7 @@ export const WelcomeVideo: React.FC = () => {
             controls
             autoPlay
             onEnded={handleVideoComplete}
+            style={{ objectFit: 'cover' }}
           >
             <source src="/videos/onboarding.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -59,13 +77,13 @@ export const WelcomeVideo: React.FC = () => {
       <Box sx={{ mt: 3, display: 'flex', alignItems: 'center', gap: 1 }}>
         {isCompleted ? (
           <>
-            <CheckIcon color="success" />
-            <Typography color="success.main">
+            <CheckIcon color="success" sx={{ fontSize: 24 }} />
+            <Typography color="success.main" sx={{ fontWeight: 500 }}>
               Great job! You've completed the welcome video.
             </Typography>
           </>
         ) : (
-          <Typography color="text.secondary">
+          <Typography color="text.secondary" sx={{ opacity: 0.8 }}>
             Please watch the complete video to proceed with your onboarding.
           </Typography>
         )}

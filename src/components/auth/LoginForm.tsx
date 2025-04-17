@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography, Paper, Container, Grid } from '@mui/material';
-import { SocialLogin } from './SocialLogin';
+import { Box, Button, TextField, Typography, Paper, Container } from '@mui/material';
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -25,25 +24,69 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
       display: 'flex', 
       justifyContent: 'center',
       alignItems: 'center',
-      minHeight: '100vh' 
+      minHeight: '100vh',
+      background: 'linear-gradient(145deg, #f6f8fc 0%, #ffffff 100%)',
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      margin: 'auto'
     }}>
-      <Paper elevation={3} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-        <Typography component="h1" variant="h5">
+      <Paper 
+        elevation={3} 
+        sx={{ 
+          p: 4, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          width: '100%',
+          borderRadius: 2,
+          transition: 'transform 0.2s ease-in-out',
+          '&:hover': {
+            transform: 'scale(1.01)'
+          }
+        }}
+      >
+        <Typography 
+          component="h1" 
+          variant="h5" 
+          sx={{ 
+            fontWeight: 600,
+            color: 'primary.main',
+            mb: 2
+          }}
+        >
           Welcome Back
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box 
+          component="form" 
+          onSubmit={handleSubmit} 
+          sx={{ 
+            mt: 3,
+            width: '100%'
+          }}
+        >
           <TextField
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Company Email"
+            label="Username"
             name="email"
             autoComplete="email"
             autoFocus
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={!!error}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                transition: 'all 0.2s ease-in-out',
+                '&:hover fieldset': {
+                  borderColor: 'primary.main'
+                }
+              }
+            }}
           />
           <TextField
             margin="normal"
@@ -67,18 +110,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 3 }}
           >
             Sign In
           </Button>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Typography variant="body2" color="text.secondary" align="center">
-                Or continue with
-              </Typography>
-            </Grid>
-          </Grid>
-          <SocialLogin />
         </Box>
       </Paper>
     </Container>
