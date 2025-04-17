@@ -7,6 +7,8 @@ import { Chat as ChatIcon } from '@mui/icons-material';
 import { CompanyCulture } from './components/onboarding/CompanyCulture';
 import { DailyLife } from './components/onboarding/DailyLife';
 import { Department } from './components/onboarding/Department';
+import { TechnicalLayout } from './components/layout/TechnicalLayout';
+import { TechnicalSection } from './components/onboarding/TechnicalSection';
 import { useOnboardingProgress } from './store/onboardingProgress';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
@@ -26,12 +28,64 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
   return element;
 };
 
-const App: React.FC = () => {
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isChatOpen, setIsChatOpen] = React.useState(false);
+  const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+
+  return (
+    <Box sx={{ display: 'flex', minHeight: '100vh', background: 'linear-gradient(145deg, #f6f8fc 0%, #ffffff 100%)' }}>
+      <CssBaseline />
+      <Header />
+      <Sidebar />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: { xs: 2, sm: 3, md: 4 },
+          mt: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 3,
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '200px',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 100%)',
+            pointerEvents: 'none'
+          }
+        }}
+      >
+        <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />
+        {children}
+        <Footer />
+      </Box>
+      {isChatOpen && <Chatbot />}
+      <Fab
+        color="primary"
+        aria-label="chat"
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        sx={{
+          position: 'fixed',
+          bottom: 24,
+          right: 24
+        }}
+      >
+        <ChatIcon />
+      </Fab>
+    </Box>
+  );
+};
+
+const AppContent: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
   });
-  const [isChatOpen, setIsChatOpen] = React.useState(false);
-  const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+
+  const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
@@ -41,11 +95,6 @@ const App: React.FC = () => {
     // TODO: Implement actual authentication
     console.log('Login attempt:', { email, password });
     setIsAuthenticated(true);
-  };
-
-  const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('isAuthenticated');
   };
 
   if (!isAuthenticated) {
@@ -58,64 +107,52 @@ const App: React.FC = () => {
   }
 
   return (
-    <Router>
-      <Box sx={{ display: 'flex', minHeight: '100vh', background: 'linear-gradient(145deg, #f6f8fc 0%, #ffffff 100%)' }}>
-        <CssBaseline />
-        <Header onLogout={handleLogout} />
-        <Sidebar />
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: { xs: 2, sm: 3, md: 4 },
-            mt: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 3,
-            position: 'relative',
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              height: '200px',
-              background: 'linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0) 100%)',
-              pointerEvents: 'none'
-            }
-          }}
-        >
-          <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />
+    <Routes>
+      {/* Main Onboarding Routes */}
+      <Route path="/" element={<MainLayout><Navigate to="/welcome-video" replace /></MainLayout>} />
+      <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+      <Route path="/welcome-video" element={<MainLayout><ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} /></MainLayout>} />
+      <Route path="/company-culture" element={<MainLayout><ProtectedRoute path="/company-culture" element={<CompanyCulture />} /></MainLayout>} />
+      <Route path="/daily-life" element={<MainLayout><ProtectedRoute path="/daily-life" element={<DailyLife />} /></MainLayout>} />
+      <Route path="/role-overview" element={<MainLayout><ProtectedRoute path="/role-overview" element={<RoleOverview />} /></MainLayout>} />
+      <Route path="/tech-stack" element={<MainLayout><ProtectedRoute path="/tech-stack" element={<TechStack />} /></MainLayout>} />
+      <Route path="/tools" element={<MainLayout><ProtectedRoute path="/tools" element={<Tools />} /></MainLayout>} />
+      <Route path="/security" element={<MainLayout><ProtectedRoute path="/security" element={<Security />} /></MainLayout>} />
+      <Route path="/team" element={<MainLayout><ProtectedRoute path="/team" element={<Team />} /></MainLayout>} />
+      <Route path="/department" element={<MainLayout><ProtectedRoute path="/department" element={<Department />} /></MainLayout>} />
+      <Route 
+        path="/faq" 
+        element={
+          <MainLayout>
+            <ProtectedRoute 
+              path="/faq" 
+              element={
+                <FAQ key={location?.state?.from || 'default'} />
+              } 
+            />
+          </MainLayout>
+        } 
+      />
+
+      {/* Technical Assessment Routes */}
+      <Route path="/technical-section/*" element={
+        <TechnicalLayout>
           <Routes>
-            <Route path="/" element={<Navigate to="/welcome-video" replace />} />
-            <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
-            <Route path="/welcome-video" element={<ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} />} />
-            <Route path="/company-culture" element={<ProtectedRoute path="/company-culture" element={<CompanyCulture />} />} />
-            <Route path="/daily-life" element={<ProtectedRoute path="/daily-life" element={<DailyLife />} />} />
-            <Route path="/role-overview" element={<ProtectedRoute path="/role-overview" element={<RoleOverview />} />} />
-            <Route path="/tech-stack" element={<ProtectedRoute path="/tech-stack" element={<TechStack />} />} />
-            <Route path="/tools" element={<ProtectedRoute path="/tools" element={<Tools />} />} />
-            <Route path="/security" element={<ProtectedRoute path="/security" element={<Security />} />} />
-            <Route path="/team" element={<ProtectedRoute path="/team" element={<Team />} />} />
-            <Route path="/department" element={<ProtectedRoute path="/department" element={<Department />} />} />
-            <Route path="/faq" element={<ProtectedRoute path="/faq" element={<FAQ />} />} />
+            <Route index element={<Navigate to="/technical-section/projects" replace />} />
+            <Route path="projects" element={<TechnicalSection />} />
+            <Route path="my-tasks" element={<TechnicalSection />} />
+            <Route path="performance" element={<TechnicalSection />} />
           </Routes>
-          <Footer />
-        </Box>
-        {isChatOpen && <Chatbot />}
-        <Fab
-          color="primary"
-          aria-label="chat"
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          sx={{
-            position: 'fixed',
-            bottom: 24,
-            right: 24
-          }}
-        >
-          <ChatIcon />
-        </Fab>
-      </Box>
+        </TechnicalLayout>
+      } />
+    </Routes>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };

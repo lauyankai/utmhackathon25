@@ -28,7 +28,8 @@ const sectionOrder = [
   'security',
   'team',
   'department',
-  'faq'
+  'faq',
+  'technical-section'
 ];
 
 export const useOnboardingProgress = create<OnboardingProgressState>((set, get) => ({
@@ -73,6 +74,11 @@ export const useOnboardingProgress = create<OnboardingProgressState>((set, get) 
   },
 
   canAccessSection: (sectionId: string) => {
+    // Temporarily allow access to technical section for testing
+    if (sectionId === 'technical-section') {
+      return true;
+    }
+
     const state = get();
     const targetSection = state.sections[sectionId];
     const previousSections = sectionOrder

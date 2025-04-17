@@ -1,9 +1,19 @@
 import React from 'react';
-import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper } from '@mui/material';
-import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
+import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper, Button } from '@mui/material';
+import { ExpandMore as ExpandMoreIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { useOnboardingProgress } from '../../store/onboardingProgress';
 import { useScrollCompletion } from '../../hooks/useScrollCompletion';
 
 export const FAQ: React.FC = () => {
+  const navigate = useNavigate();
+  const completeSection = useOnboardingProgress(state => state.completeSection);
+
+  const handleNext = () => {
+    completeSection('faq');
+    navigate('/technical-section');
+  };
+
   useScrollCompletion('faq');
 
   const faqs = [
@@ -73,6 +83,18 @@ export const FAQ: React.FC = () => {
           </Accordion>
         ))}
       </Paper>
+
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 4 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          endIcon={<ArrowForwardIcon />}
+          onClick={handleNext}
+        >
+          Next: Technical Section
+        </Button>
+      </Box>
     </Box>
   );
 };
