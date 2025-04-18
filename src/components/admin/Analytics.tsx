@@ -25,21 +25,37 @@ export const Analytics: React.FC = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
+    <Box sx={{ 
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3
+    }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Onboarding Analytics
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ width: '100%', m: 0 }}>
         {analyticsData.onboardingMetrics.map((metric, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
-            <Paper elevation={2}>
-              <Card>
-                <CardContent sx={{ textAlign: 'center' }}>
-                  <Box sx={{ color: 'primary.main', mb: 2 }}>
+            <Paper 
+              elevation={2}
+              sx={{
+                height: '100%',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: (theme) => theme.shadows[4]
+                }
+              }}
+            >
+              <Card sx={{ height: '100%' }}>
+                <CardContent sx={{ textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Box sx={{ color: 'primary.main' }}>
                     {metric.icon}
                   </Box>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6">
                     {metric.label}
                   </Typography>
                   <Typography variant="h4" color="primary.main">
@@ -52,9 +68,20 @@ export const Analytics: React.FC = () => {
         ))}
       </Grid>
 
-      <Grid container spacing={3} sx={{ mt: 4 }}>
+      <Grid container spacing={3} sx={{ width: '100%', m: 0, flex: 1 }}>
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 3 }}>
+          <Paper 
+            elevation={2} 
+            sx={{ 
+              p: 3,
+              height: '100%',
+              transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: (theme) => theme.shadows[4]
+              }
+            }}
+          >
             <Typography variant="h6" gutterBottom>
               Top Performing Modules
             </Typography>
@@ -89,7 +116,18 @@ export const Analytics: React.FC = () => {
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 3 }}>
+          <Paper
+            elevation={2} 
+            sx={{ 
+              p: 3,
+              height: '100%',
+              transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: (theme) => theme.shadows[4]
+              }
+            }}
+          >
             <Typography variant="h6" gutterBottom>
               Department Progress
             </Typography>
