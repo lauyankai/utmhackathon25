@@ -11,6 +11,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Header, Footer, Chatbot } from '../../components';
 import { useOnboardingProgress } from '../../store/onboardingProgress';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 
 const drawerWidth = 280;
 
@@ -25,6 +26,8 @@ export const TechnicalLayout: React.FC<{ children: React.ReactNode }> = ({ child
   const location = useLocation();
   const navigate = useNavigate();
   const [isChatOpen, setIsChatOpen] = React.useState(false);
+
+  useScrollToTop();
 
   const handleBackClick = () => {
     const currentSection = useOnboardingProgress.getState().getCurrentSection();

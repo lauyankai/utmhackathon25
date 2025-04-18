@@ -11,6 +11,7 @@ import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Tea
 import { AvailableProjects, TechnicalIntro, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
+import { useScrollToTop } from './hooks/useScrollToTop';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
@@ -29,6 +30,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
   const navigate = useNavigate();
+
+  // Add scroll to top behavior
+  useScrollToTop();
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
