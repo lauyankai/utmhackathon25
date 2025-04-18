@@ -1,28 +1,8 @@
 import React, { useState, useRef } from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  Button,
-  Chip,
-  Divider,
-  Alert,
-  AlertTitle,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  LinearProgress,
-  Stack,
-} from '@mui/material';
-import {
-  Assignment as AssignmentIcon,
-  CloudUpload as CloudUploadIcon,
-  Delete as DeleteIcon,
-  CheckCircle as CheckCircleIcon,
-  Schedule as ScheduleIcon,
-  Description as DescriptionIcon,
+import { Box, Typography, Paper, Button, Chip, Divider, Alert, AlertTitle,
+  List, ListItem, ListItemIcon, ListItemText, IconButton, LinearProgress } from '@mui/material';
+import { Assignment as AssignmentIcon, CloudUpload as CloudUploadIcon, Delete as DeleteIcon,
+  CheckCircle as CheckCircleIcon, Schedule as ScheduleIcon, Description as DescriptionIcon,
 } from '@mui/icons-material';
 
 interface TaskFile {
@@ -32,7 +12,6 @@ interface TaskFile {
 }
 
 export const MyTasks: React.FC = () => {
-  // In a real app, this would come from your global state management
   const selectedTask = {
     projectId: 1,
     title: 'Product Catalog Service',
@@ -83,7 +62,6 @@ export const MyTasks: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsSubmitting(false);
     setSubmitSuccess(true);
