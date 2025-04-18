@@ -10,6 +10,7 @@ import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Tea
   Tools, Welcome, WelcomeLanding, WelcomeVideo } from './components/onboarding/non_tech';
 import { AvailableProjects, TechnicalIntro, TechnicalSection, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
+import { TechnicalLayout } from './components/layout/TechnicalLayout';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
