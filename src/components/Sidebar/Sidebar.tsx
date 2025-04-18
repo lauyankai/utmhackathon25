@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Drawer, Box, Typography, List, ListItem, Button, Tooltip } from '@mui/material';
+import React from 'react';
+import { Drawer, Box, Typography, List, ListItem, Button, Tooltip, Divider } from '@mui/material';
 import { 
   PlayArrow as PlayIcon,
   Business as CompanyIcon,
@@ -11,7 +11,10 @@ import {
   Group as TeamIcon,
   Domain as DepartmentIcon,
   QuestionAnswer as FAQIcon,
-  Lock as LockIcon
+  Lock as LockIcon,
+  Dashboard as DashboardIcon,
+  People as PeopleIcon,
+  Analytics as AnalyticsIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useOnboardingProgress } from '../../store/onboardingProgress';
@@ -22,8 +25,15 @@ export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const canAccessSection = useOnboardingProgress(state => state.canAccessSection);
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
-  const sections = [
+  const adminSections = [
+    { path: '/admin/dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
+    { path: '/admin/users', label: 'User Management', icon: <PeopleIcon /> },
+    { path: '/admin/analytics', label: 'Analytics', icon: <AnalyticsIcon /> }
+  ];
+
+  const onboardingSections = [
     { path: '/welcome-video', label: 'Welcome Video', icon: <PlayIcon /> },
     { path: '/company-culture', label: 'Company Culture', icon: <CompanyIcon /> },
     { path: '/daily-life', label: 'Daily Life', icon: <DailyLifeIcon /> },
@@ -36,6 +46,8 @@ export const Sidebar: React.FC = () => {
     { path: '/faq', label: 'FAQ', icon: <FAQIcon /> }
   ];
 
+  const sections = isAdmin ? adminSections : onboardingSections;
+
   return (
     <Drawer
       variant="permanent"
@@ -45,50 +57,34 @@ export const Sidebar: React.FC = () => {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#ffffff',
-          borderRight: '1px solid rgba(0, 0, 0, 0.08)',
-          boxShadow: '4px 0 8px rgba(0, 0, 0, 0.02)',
-          transition: 'all 0.3s ease-in-out'
-        }
+          bgcolor: 'background.paper',
+          borderRight: '1px solid rgba(0, 0, 0, 0.12)',
+        },
       }}
     >
-      <Box sx={{ 
-        overflow: 'auto',
-        mt: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        height: 'calc(100% - 64px)'
-      }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            px: 3, 
-            py: 2, 
-            color: 'primary.main',
-            fontWeight: 600,
-            letterSpacing: '0.5px'
-          }}
-        >
-          Onboarding Journey
-        </Typography>
-        
+      <Box sx={{ overflow: 'auto', mt: 8 }}>
+        <Box sx={{ px: 2, py: 2 }}>
+          <Typography variant="h6" color="primary">
+            {isAdmin ? 'Admin Panel' : 'Onboarding Progress'}
+          </Typography>
+        </Box>
         <Box sx={{ px: 2 }}>
           {sections.map((item) => {
             const isSelected = location.pathname === item.path;
-            const canAccess = canAccessSection(item.path.substring(1));
+            const canAccess = isAdmin ? true : canAccessSection(item.path.substring(1));
             const sectionId = item.path.substring(1);
 
             return (
               <Tooltip 
                 key={item.label}
-                title={!canAccess ? "Complete previous sections first" : ""}
+                title={!canAccess && !isAdmin ? "Complete previous sections first" : ""}
                 placement="right"
               >
                 <span>
                   <Button
                     onClick={() => canAccess && navigate(item.path)}
                     fullWidth
-                    disabled={!canAccess}
+                    disabled={!canAccess && !isAdmin}
                     startIcon={
                       <Box
                         component="span"
@@ -98,29 +94,20 @@ export const Sidebar: React.FC = () => {
                           minWidth: 32
                         }}
                       >
-                        {!canAccess ? <LockIcon /> : item.icon}
+                        {!canAccess && !isAdmin ? <LockIcon /> : item.icon}
                       </Box>
                     }
                     sx={{
-                      mb: 0.5,
-                      py: 1,
-                      px: 1.5,
-                      borderRadius: 1.5,
                       justifyContent: 'flex-start',
-                      fontSize: '0.875rem',
-                      color: isSelected ? 'white' : canAccess ? 'text.primary' : 'text.disabled',
+                      px: 2,
+                      py: 1,
+                      mb: 1,
+                      borderRadius: 2,
                       backgroundColor: isSelected ? 'primary.main' : 'transparent',
-                      transition: 'all 0.2s ease-in-out',
-                      transform: isSelected ? 'scale(1.01)' : 'none',
-                      boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      color: isSelected ? 'white' : 'text.primary',
                       '&:hover': {
-                        backgroundColor: isSelected ? 'primary.dark' : canAccess ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
-                        transform: canAccess ? 'scale(1.01)' : 'none'
+                        backgroundColor: isSelected ? 'primary.dark' : 'action.hover',
                       },
-                      '&.Mui-disabled': {
-                        opacity: 0.6,
-                        color: 'text.disabled'
-                      }
                     }}
                   >
                     {item.label}
