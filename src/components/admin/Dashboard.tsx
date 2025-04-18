@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid, Paper, Card, CardContent, LinearProgress } from '@mui/material';
+import { Box, Typography, Paper, Card, CardContent, LinearProgress } from '@mui/material';
 import { People as PeopleIcon, Timeline as TimelineIcon, CheckCircle as CheckCircleIcon, TrendingUp as TrendingUpIcon } from '@mui/icons-material';
 
 export const Dashboard: React.FC = () => {
@@ -43,9 +43,23 @@ export const Dashboard: React.FC = () => {
         Admin Dashboard
       </Typography>
       
-      <Grid container spacing={3} sx={{ width: '100%', m: 0 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 3,
+          width: '100%',
+        }}
+      >
         {metrics.map((metric, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
+          <Box
+            key={index}
+            sx={{
+              flex: '1 1 calc(25% - 24px)',
+              minWidth: '250px',
+              maxWidth: '300px',
+            }}
+          >
             <Paper 
               elevation={2}
               sx={{
@@ -85,12 +99,19 @@ export const Dashboard: React.FC = () => {
                 </CardContent>
               </Card>
             </Paper>
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
 
-      <Grid container spacing={3} sx={{ width: '100%', m: 0 }}>
-        <Grid item xs={12} md={8}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 3,
+          width: '100%',
+        }}
+      >
+        <Box sx={{ flex: '1 1 calc(66.666% - 12px)', minWidth: '300px' }}>
           <Paper 
             elevation={2} 
             sx={{ 
@@ -108,8 +129,8 @@ export const Dashboard: React.FC = () => {
             </Typography>
             {/* TODO: Add activity timeline component */}
           </Paper>
-        </Grid>
-        <Grid item xs={12} md={4}>
+        </Box>
+        <Box sx={{ flex: '1 1 calc(33.333% - 12px)', minWidth: '250px' }}>
           <Paper 
             elevation={2} 
             sx={{ 
@@ -127,8 +148,8 @@ export const Dashboard: React.FC = () => {
             </Typography>
             {/* TODO: Add quick stats component */}
           </Paper>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Box>
   );
 };
