@@ -14,9 +14,11 @@ import { TechnicalLayout } from './components/layout/TechnicalLayout';
 import { useScrollToTop } from './hooks/useScrollToTop';
 import { Dashboard, UserManagement, Analytics } from './components';
 
-const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element }) => {
+const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
+  const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
   const location = useLocation();
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+  const currentSection = useOnboardingProgress(state => state.getCurrentSection());
 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
@@ -104,6 +106,10 @@ const AppContent: React.FC = () => {
     return localStorage.getItem('hasStartedOnboarding') === 'true';
   });
   
+  const [technicalSectionStarted, setTechnicalSectionStarted] = React.useState(() => {
+    return localStorage.getItem('technicalSectionStarted') === 'true';
+  });
+
   const location = useLocation();
 
   useEffect(() => {
@@ -114,6 +120,7 @@ const AppContent: React.FC = () => {
     // Listen for changes to hasStartedOnboarding in localStorage
     const handleStorageChange = () => {
       setHasStartedOnboarding(localStorage.getItem('hasStartedOnboarding') === 'true');
+      setTechnicalSectionStarted(localStorage.getItem('technicalSectionStarted') === 'true');
     };
     
     window.addEventListener('storage', handleStorageChange);
