@@ -185,11 +185,11 @@ const AppContent: React.FC = () => {
       <Route path="/technical-section/*" element={
         <TechnicalLayout>
           <Routes>
-            <Route index element={<Navigate to="/technical-section/skill-analysis" replace />} />
+            <Route index element={<SkillAnalysis />} />
             <Route path="skill-analysis" element={<SkillAnalysis onContinue={() => {}} />} />
             <Route path="projects" element={<AvailableProjects />} />
-            <Route path="my-tasks" element={<div>My Tasks</div>} />
-            <Route path="performance" element={<div>Performance</div>} />
+            <Route path="my-tasks" element={<MyTasks />} />
+            <Route path="performance" element={<Performance />} />
           </Routes>
         </TechnicalLayout>
       } />

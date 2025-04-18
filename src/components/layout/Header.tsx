@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Avatar, Box, Menu, MenuItem } from '@mui/material';
 import { AccountCircle as AccountIcon, Notifications as NotificationsIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/logo.png';
 
 interface HeaderProps {
   onLogout: () => void;
@@ -26,10 +27,18 @@ export const Header: React.FC<HeaderProps> = ({ onLogout }) => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar position="fixed" sx={{ 
+      zIndex: (theme) => theme.zIndex.drawer + 1,
+      bgcolor: '#f8f9fa',
+      color: 'primary.main',
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.61)'
+    }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Company Onboarding
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexGrow: 0 }}>
+          <img src={logo} alt="Company Logo" style={{ height: '40px', width: 'auto' }} />
+        </Box>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 2 }}>
+          Company Onboarding Assistant
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
           <IconButton

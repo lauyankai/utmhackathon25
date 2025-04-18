@@ -21,7 +21,6 @@ export * from './onboarding/tech/AvailableProjects';
 export * from './onboarding/tech/MyTasks';
 export * from './onboarding/tech/Performance';
 export * from './onboarding/tech/SkillAnalysis';
-export * from './onboarding/tech/TechnicalSection';
 export * from './onboarding/tech/TechnicalIntro';
 export * from './common/Chatbot';
 
