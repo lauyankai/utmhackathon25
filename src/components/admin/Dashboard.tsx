@@ -31,31 +31,57 @@ export const Dashboard: React.FC = () => {
   ];
 
   return (
-    <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
+    <Box sx={{ 
+      width: '100%',
+      minHeight: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3,
+      flex: 1
+    }}>
       <Typography variant="h4" component="h1" gutterBottom>
         Admin Dashboard
       </Typography>
       
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ width: '100%', m: 0 }}>
         {metrics.map((metric, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
-            <Paper elevation={2}>
-              <Card>
-                <CardContent sx={{ textAlign: 'center' }}>
-                  <Box sx={{ color: 'primary.main', mb: 2 }}>
+            <Paper 
+              elevation={2}
+              sx={{
+                height: '100%',
+                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: (theme) => theme.shadows[4]
+                }
+              }}
+            >
+              <Card sx={{ height: '100%' }}>
+                <CardContent sx={{ textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Box sx={{ color: 'primary.main' }}>
                     {metric.icon}
                   </Box>
-                  <Typography variant="h6" gutterBottom>
+                  <Typography variant="h6">
                     {metric.title}
                   </Typography>
-                  <Typography variant="h4" color="primary.main" gutterBottom>
+                  <Typography variant="h4" color="primary.main">
                     {metric.value}
                   </Typography>
-                  <LinearProgress 
-                    variant="determinate" 
-                    value={metric.progress}
-                    sx={{ height: 8, borderRadius: 4 }}
-                  />
+                  <Box sx={{ mt: 'auto' }}>
+                    <LinearProgress 
+                      variant="determinate" 
+                      value={metric.progress}
+                      sx={{ 
+                        height: 8, 
+                        borderRadius: 4,
+                        backgroundColor: 'rgba(0, 0, 0, 0.08)',
+                        '& .MuiLinearProgress-bar': {
+                          borderRadius: 4
+                        }
+                      }}
+                    />
+                  </Box>
                 </CardContent>
               </Card>
             </Paper>
@@ -63,9 +89,20 @@ export const Dashboard: React.FC = () => {
         ))}
       </Grid>
 
-      <Grid container spacing={3} sx={{ mt: 4 }}>
+      <Grid container spacing={3} sx={{ width: '100%', m: 0 }}>
         <Grid item xs={12} md={8}>
-          <Paper elevation={2} sx={{ p: 3 }}>
+          <Paper 
+            elevation={2} 
+            sx={{ 
+              p: 3,
+              height: '100%',
+              transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: (theme) => theme.shadows[4]
+              }
+            }}
+          >
             <Typography variant="h6" gutterBottom>
               Recent Activity
             </Typography>
@@ -73,7 +110,18 @@ export const Dashboard: React.FC = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Paper elevation={2} sx={{ p: 3 }}>
+          <Paper 
+            elevation={2} 
+            sx={{ 
+              p: 3,
+              height: '100%',
+              transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: (theme) => theme.shadows[4]
+              }
+            }}
+          >
             <Typography variant="h6" gutterBottom>
               Quick Stats
             </Typography>

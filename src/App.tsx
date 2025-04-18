@@ -31,6 +31,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
   const navigate = useNavigate();
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   // Add scroll to top behavior
   useScrollToTop();
@@ -38,6 +39,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('hasStartedOnboarding');
+    localStorage.removeItem('isAdmin');
     navigate('/login');
   };
 
@@ -68,23 +70,25 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           }
         }}
       >
-        <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />
+        {!isAdmin && <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />}
         {children}
         <Footer />
       </Box>
-      {isChatOpen && <Chatbot />}
-      <Fab
-        color="primary"
-        aria-label="chat"
-        onClick={() => setIsChatOpen(!isChatOpen)}
-        sx={{
-          position: 'fixed',
-          bottom: 24,
-          right: 24
-        }}
-      >
-        <ChatIcon />
-      </Fab>
+      {!isAdmin && isChatOpen && <Chatbot />}
+      {!isAdmin && (
+        <Fab
+          color="primary"
+          aria-label="chat"
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24
+          }}
+        >
+          <ChatIcon />
+        </Fab>
+      )}
     </Box>
   );
 };
