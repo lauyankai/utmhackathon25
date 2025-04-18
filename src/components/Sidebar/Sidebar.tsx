@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, Box, Typography, List, ListItem, Button } from '@mui/material';
+import { Drawer, Box, Typography, List, ListItem, Button, Tooltip } from '@mui/material';
 import { 
   PlayArrow as PlayIcon,
   Business as CompanyIcon,
@@ -10,7 +10,8 @@ import {
   Security as SecurityIcon,
   Group as TeamIcon,
   Domain as DepartmentIcon,
-  QuestionAnswer as FAQIcon
+  QuestionAnswer as FAQIcon,
+  Lock as LockIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useOnboardingProgress } from '../../store/onboardingProgress';
@@ -71,46 +72,61 @@ export const Sidebar: React.FC = () => {
           Onboarding Journey
         </Typography>
         
-        <Box sx={{ px: 1, flex: 1, overflowY: 'auto' }}>
+        <Box sx={{ px: 2 }}>
           {sections.map((item) => {
             const isSelected = location.pathname === item.path;
+            const canAccess = canAccessSection(item.path.substring(1));
+            const sectionId = item.path.substring(1);
+
             return (
-              <Button
+              <Tooltip 
                 key={item.label}
-                onClick={() => navigate(item.path)}
-                fullWidth
-                startIcon={
-                  <Box
-                    component="span"
+                title={!canAccess ? "Complete previous sections first" : ""}
+                placement="right"
+              >
+                <span>
+                  <Button
+                    onClick={() => canAccess && navigate(item.path)}
+                    fullWidth
+                    disabled={!canAccess}
+                    startIcon={
+                      <Box
+                        component="span"
+                        sx={{
+                          color: isSelected ? 'white' : canAccess ? 'primary.main' : 'text.disabled',
+                          display: 'flex',
+                          minWidth: 32
+                        }}
+                      >
+                        {!canAccess ? <LockIcon /> : item.icon}
+                      </Box>
+                    }
                     sx={{
-                      color: isSelected ? 'white' : 'primary.main',
-                      display: 'flex',
-                      minWidth: 32
+                      mb: 0.5,
+                      py: 1,
+                      px: 1.5,
+                      borderRadius: 1.5,
+                      justifyContent: 'flex-start',
+                      fontSize: '0.875rem',
+                      color: isSelected ? 'white' : canAccess ? 'text.primary' : 'text.disabled',
+                      backgroundColor: isSelected ? 'primary.main' : 'transparent',
+                      transition: 'all 0.2s ease-in-out',
+                      transform: isSelected ? 'scale(1.01)' : 'none',
+                      boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      '&:hover': {
+                        backgroundColor: isSelected ? 'primary.dark' : canAccess ? 'rgba(0, 0, 0, 0.04)' : 'transparent',
+                        transform: canAccess ? 'scale(1.01)' : 'none'
+                      },
+                      '&.Mui-disabled': {
+                        opacity: 0.6,
+                        color: 'text.disabled'
+                      }
                     }}
                   >
-                    {item.icon}
-                  </Box>
-                }
-                sx={{
-                  mb: 0.5,
-                  py: 1,
-                  px: 1.5,
-                  borderRadius: 1.5,
-                  justifyContent: 'flex-start',
-                  fontSize: '0.875rem',
-                  color: isSelected ? 'white' : 'text.primary',
-                  backgroundColor: isSelected ? 'primary.main' : 'transparent',
-                  transition: 'all 0.2s ease-in-out',
-                  transform: isSelected ? 'scale(1.01)' : 'none',
-                  boxShadow: isSelected ? '0 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
-                  '&:hover': {
-                    backgroundColor: isSelected ? 'primary.dark' : 'rgba(0, 0, 0, 0.04)',
-                    transform: 'scale(1.01)'
-                  }
-                }}
-              >
-                {item.label}
-              </Button>
+                    {item.label}
+                  </Button>
+                </span>
+              </Tooltip>
             );
           })}
         </Box>
