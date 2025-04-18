@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Box, Typography, List, ListItem, Button, Tooltip, Divider } from '@mui/material';
+import { Drawer, Box, Typography, Button, Tooltip } from '@mui/material';
 import { 
   PlayArrow as PlayIcon,
   Business as CompanyIcon,
@@ -72,7 +72,6 @@ export const Sidebar: React.FC = () => {
           {sections.map((item) => {
             const isSelected = location.pathname === item.path;
             const canAccess = isAdmin ? true : canAccessSection(item.path.substring(1));
-            const sectionId = item.path.substring(1);
 
             return (
               <Tooltip 
