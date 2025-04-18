@@ -10,8 +10,7 @@ import {
   Security as SecurityIcon,
   Group as TeamIcon,
   Domain as DepartmentIcon,
-  QuestionAnswer as FAQIcon,
-  Code as TechnicalIcon
+  QuestionAnswer as FAQIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useOnboardingProgress } from '../../store/onboardingProgress';

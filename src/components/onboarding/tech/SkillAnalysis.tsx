@@ -1,24 +1,8 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  Rating,
-  Stack,
-} from '@mui/material';
-import {
-  TrendingUp as TrendingUpIcon,
-  Lightbulb as LightbulbIcon,
-  Analytics as AnalyticsIcon,
-  Timeline as TimelineIcon,
-  Star as StarIcon,
-  Insights as InsightsIcon,
-} from '@mui/icons-material';
+import { Box, Typography, Paper, List, ListItem, ListItemIcon, ListItemText,
+  Divider, Rating, Stack } from '@mui/material';
+import { TrendingUp as TrendingUpIcon, Lightbulb as LightbulbIcon, Analytics as AnalyticsIcon,
+  Timeline as TimelineIcon, Star as StarIcon, Insights as InsightsIcon } from '@mui/icons-material';
 
 interface SkillAnalysisProps {
   onContinue: () => void;

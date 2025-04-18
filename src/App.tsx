@@ -8,7 +8,7 @@ import { useOnboardingProgress } from './store/onboardingProgress';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Team, TechStack, 
   Tools, Welcome, WelcomeLanding, WelcomeVideo } from './components/onboarding/non_tech';
-import { AvailableProjects, TechnicalIntro, TechnicalSection, SkillAnalysis,
+import { AvailableProjects, TechnicalIntro, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
 
@@ -21,7 +21,6 @@ const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = 
   if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
-
   
   return element;
 };
@@ -185,7 +184,6 @@ const AppContent: React.FC = () => {
       <Route path="/technical-section/*" element={
         <TechnicalLayout>
           <Routes>
-            <Route index element={<SkillAnalysis />} />
             <Route path="skill-analysis" element={<SkillAnalysis onContinue={() => {}} />} />
             <Route path="projects" element={<AvailableProjects />} />
             <Route path="my-tasks" element={<MyTasks />} />

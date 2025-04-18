@@ -8,13 +8,10 @@ import {
   CardContent,
   Chip,
   Button,
-  Divider,
-  LinearProgress,
+  Divider
 } from '@mui/material';
 import {
-  Assignment as AssignmentIcon,
   Schedule as ScheduleIcon,
-  Speed as SpeedIcon,
   Business as BusinessIcon,
   AutoGraph as AutoGraphIcon,
   AccountTree as AccountTreeIcon,
