@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  Stack,
-  Chip,
-  LinearProgress,
-  Grid,
-  Rating,
-  Divider,
-} from '@mui/material';
+import { Box, Typography, Paper, Stack, Chip, LinearProgress, Rating, Divider } from '@mui/material';
 import {
   Analytics as AnalyticsIcon,
   Group as GroupIcon,
@@ -21,7 +11,6 @@ import {
 } from '@mui/icons-material';
 
 export const Performance: React.FC = () => {
-  // In a real app, this would come from an API
   const examplePerformance = {
     projectDetails: {
       title: 'Product Catalog Service',

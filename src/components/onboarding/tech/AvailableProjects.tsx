@@ -34,7 +34,6 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 export const AvailableProjects: React.FC = () => {
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [selectedTask, setSelectedTask] = useState<{ projectId: number, taskIndex: number } | null>(null);
   const [isGenerating, setIsGenerating] = useState(true);
   const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
@@ -199,7 +198,6 @@ export const AvailableProjects: React.FC = () => {
     if (selectedTask && (selectedTask.projectId !== projectId || selectedTask.taskIndex !== taskIndex)) {
       return; // Prevent selecting multiple tasks
     }
-    setSelectedProject(projectId);
     setSelectedTask({ projectId, taskIndex });
     setOpenConfirmDialog(true);
   };
@@ -473,4 +471,4 @@ export const AvailableProjects: React.FC = () => {
       </Dialog>
     </Box>
   );
-}; 
+};

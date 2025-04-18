@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper, Button } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';

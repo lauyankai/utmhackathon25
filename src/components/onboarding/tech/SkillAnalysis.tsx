@@ -8,7 +8,7 @@ interface SkillAnalysisProps {
   onContinue: () => void;
 }
 
-export const SkillAnalysis: React.FC<SkillAnalysisProps> = ({ onContinue }) => {
+export const SkillAnalysis: React.FC<SkillAnalysisProps> = ({}) => {
   const [isAnalyzing, setIsAnalyzing] = useState(true);
 
   const skillCategories = [
@@ -235,4 +235,4 @@ export const SkillAnalysis: React.FC<SkillAnalysisProps> = ({ onContinue }) => {
       )}
     </Box>
   );
-}; 
+};
