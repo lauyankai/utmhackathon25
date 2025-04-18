@@ -22,41 +22,12 @@ export const Footer: React.FC = () => {
         >
           <Box>
             <Typography variant="subtitle2" color="primary" sx={{ fontWeight: 600, mb: 1 }}>
-              Company Onboarding Portal
+              Company Onboarding Assistant
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              © {new Date().getFullYear()} Company Name. All rights reserved.
+              Wello! © {new Date().getFullYear()} All rights reserved.
             </Typography>
           </Box>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
-            <Link
-              href="#"
-              color="inherit"
-              underline="hover"
-              variant="body2"
-              sx={{ fontWeight: 500 }}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#"
-              color="inherit"
-              underline="hover"
-              variant="body2"
-              sx={{ fontWeight: 500 }}
-            >
-              Terms of Service
-            </Link>
-            <Link
-              href="#"
-              color="inherit"
-              underline="hover"
-              variant="body2"
-              sx={{ fontWeight: 500 }}
-            >
-              Contact Support
-            </Link>
-          </Stack>
         </Stack>
       </Container>
     </Box>
