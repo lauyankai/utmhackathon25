@@ -12,7 +12,6 @@ import { AvailableProjects, TechnicalIntro, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
 import { useScrollToTop } from './hooks/useScrollToTop';
-import { Dashboard, UserManagement, Analytics } from './components';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
@@ -31,7 +30,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isChatOpen, setIsChatOpen] = React.useState(false);
   const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   // Add scroll to top behavior
   useScrollToTop();
@@ -39,7 +37,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('hasStartedOnboarding');
-    localStorage.removeItem('isAdmin');
     navigate('/login');
   };
 
@@ -70,25 +67,23 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           }
         }}
       >
-        {!isAdmin && <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />}
+        <ProgressHeader title="Onboarding Progress" completionPercentage={completionPercentage} />
         {children}
         <Footer />
       </Box>
-      {!isAdmin && isChatOpen && <Chatbot />}
-      {!isAdmin && (
-        <Fab
-          color="primary"
-          aria-label="chat"
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          sx={{
-            position: 'fixed',
-            bottom: 24,
-            right: 24
-          }}
-        >
-          <ChatIcon />
-        </Fab>
-      )}
+      {isChatOpen && <Chatbot />}
+      <Fab
+        color="primary"
+        aria-label="chat"
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        sx={{
+          position: 'fixed',
+          bottom: 24,
+          right: 24
+        }}
+      >
+        <ChatIcon />
+      </Fab>
     </Box>
   );
 };
@@ -96,10 +91,6 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const AppContent: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(() => {
     return localStorage.getItem('isAuthenticated') === 'true';
-  });
-  
-  const [isAdmin, setIsAdmin] = React.useState(() => {
-    return localStorage.getItem('isAdmin') === 'true';
   });
   
   const [hasStartedOnboarding, setHasStartedOnboarding] = React.useState(() => {
@@ -130,20 +121,11 @@ const AppContent: React.FC = () => {
   }, []);
 
   const handleLogin = (email: string, password: string) => {
-    // Basic admin authentication
-    if (email === 'admin' && password === 'Admin123') {
-      setIsAuthenticated(true);
-      setIsAdmin(true);
-      localStorage.setItem('isAdmin', 'true');
-      localStorage.removeItem('hasStartedOnboarding');
-      setHasStartedOnboarding(false);
-    } else {
-      setIsAuthenticated(true);
-      setIsAdmin(false);
-      localStorage.setItem('isAdmin', 'false');
-      localStorage.removeItem('hasStartedOnboarding');
-      setHasStartedOnboarding(false);
-    }
+    // TODO: Implement actual authentication
+    console.log('Login attempt:', { email, password });
+    setIsAuthenticated(true);
+    localStorage.removeItem('hasStartedOnboarding');
+    setHasStartedOnboarding(false);
   };
 
   if (!isAuthenticated) {
@@ -156,7 +138,7 @@ const AppContent: React.FC = () => {
   }
   
   // Show welcome landing page if onboarding hasn't started yet
-  if (!hasStartedOnboarding && !isAdmin) {
+  if (!hasStartedOnboarding) {
     // Handle any route when onboarding hasn't started yet
     return (
       <Routes>
@@ -166,14 +148,14 @@ const AppContent: React.FC = () => {
   }
   
   // Show technical intro page if the user completed the FAQ section
-  if (location.pathname === '/technical-intro' && !isAdmin) {
+  if (location.pathname === '/technical-intro') {
     return <TechnicalIntro />;
   }
 
   return (
     <Routes>
       {/* Main Onboarding Routes */}
-      <Route path="/" element={<MainLayout><Navigate to={isAdmin ? "/admin/dashboard" : "/welcome-video"} replace /></MainLayout>} />
+      <Route path="/" element={<MainLayout><Navigate to="/welcome-video" replace /></MainLayout>} />
       <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
       <Route path="/welcome" element={<MainLayout><ProtectedRoute path="/welcome" element={<Welcome />} /></MainLayout>} />
       <Route path="/welcome-video" element={<MainLayout><ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} /></MainLayout>} />
@@ -214,23 +196,6 @@ const AppContent: React.FC = () => {
         </TechnicalLayout>
       } />
       
-      {/* Admin Routes */}
-      <Route path="/admin/dashboard" element={
-        <MainLayout>
-          <ProtectedRoute path="/admin/dashboard" element={isAdmin ? <Dashboard /> : <Navigate to="/welcome-video" replace />} />
-        </MainLayout>
-      } />
-      <Route path="/admin/users" element={
-        <MainLayout>
-          <ProtectedRoute path="/admin/users" element={isAdmin ? <UserManagement /> : <Navigate to="/welcome-video" replace />} />
-        </MainLayout>
-      } />
-      <Route path="/admin/analytics" element={
-        <MainLayout>
-          <ProtectedRoute path="/admin/analytics" element={isAdmin ? <Analytics /> : <Navigate to="/welcome-video" replace />} />
-        </MainLayout>
-      } />
-
       {/* Catch-all route - redirect to welcome video if no other routes match */}
       <Route path="*" element={<Navigate to="/welcome-video" replace />} />
     </Routes>
