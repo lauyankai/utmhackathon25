@@ -149,7 +149,6 @@ export const UserManagement: React.FC = () => {
   };
 
   const handleSave = () => {
-    // TODO: Implement save functionality
     handleClose();
   };
 
@@ -174,8 +173,13 @@ export const UserManagement: React.FC = () => {
         <Typography variant="h6" gutterBottom>
           Performance Analysis & Recommendations
         </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: 3,
+          width: '100%'
+        }}>
+          <Box sx={{ flex: '1 1 400px', minWidth: '300px' }}>
             <Box sx={{ mb: 3 }}>
               <Typography variant="subtitle1" color="primary" gutterBottom>
                 Performance Metrics
@@ -226,8 +230,9 @@ export const UserManagement: React.FC = () => {
                 </Box>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          </Box>
+
+          <Box sx={{ flex: '1 1 400px', minWidth: '300px' }}>
             <Typography variant="subtitle1" color="primary" gutterBottom>
               Recommendations
             </Typography>
@@ -253,12 +258,18 @@ export const UserManagement: React.FC = () => {
                 sx={{ fontSize: '1rem' }}
               />
             </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="subtitle1" color="primary" gutterBottom sx={{ mt: 2 }}>
+          </Box>
+
+          <Box sx={{ width: '100%' }}>
+            <Typography variant="subtitle1" color="primary" gutterBottom>
               Detailed Capabilities Assessment
             </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              gap: 3,
+              '& > *': { flex: '1 1 300px' }
+            }}>
               <Box>
                 <Typography variant="subtitle2" gutterBottom color="primary">
                   Technical Capabilities
@@ -296,8 +307,8 @@ export const UserManagement: React.FC = () => {
                 </Box>
               </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </CardContent>
     </Card>
   );
