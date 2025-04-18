@@ -16,7 +16,7 @@ import {
   Lightbulb as LightbulbIcon,
   Code as CodeIcon
 } from '@mui/icons-material';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 
 export const Welcome: React.FC = () => {
   const navigate = useNavigate();

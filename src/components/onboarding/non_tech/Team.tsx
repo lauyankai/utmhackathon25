@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Card, CardContent, Avatar, Chip, IconButton, Stack } from '@mui/material';
 import { Email as EmailIcon, LinkedIn as LinkedInIcon, GitHub as GitHubIcon } from '@mui/icons-material';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 
 interface TeamMember {
   name: string;

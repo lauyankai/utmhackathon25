@@ -4,30 +4,26 @@ export * from './auth/LoginForm';
 // Layout Components
 export * from './layout/Header';
 export * from './layout/Footer';
+export * from './ProgressHeader/ProgressHeader';
 
 // Feature Components
-export * from './onboarding/WelcomeVideo';
-export * from './onboarding/CompanyCulture';
-export { DailyLife } from './onboarding/DailyLife';
-export * from './onboarding/RoleOverview';
-export * from './onboarding/WelcomeLanding';
-export * from './onboarding/TechStack';
-export * from './onboarding/Tools';
-export * from './onboarding/Security';
-export * from './onboarding/Team';
-export * from './onboarding/Department';
-export * from './onboarding/FAQ';
-export * from './onboarding/TechnicalIntro';
-export * from './onboarding/TechnicalSection';
-
-// Common Components
+export * from './onboarding/non_tech/WelcomeVideo';
+export * from './onboarding/non_tech/CompanyCulture';
+export * from './onboarding/non_tech/DailyLife';
+export * from './onboarding/non_tech/RoleOverview';
+export * from './onboarding/non_tech/TechStack';
+export * from './onboarding/non_tech/Tools';
+export * from './onboarding/non_tech/Security';
+export * from './onboarding/non_tech/Team';
+export * from './onboarding/non_tech/Department';
+export * from './onboarding/non_tech/FAQ';
+export * from './onboarding/tech/AvailableProjects';
+export * from './onboarding/tech/MyTasks';
+export * from './onboarding/tech/Performance';
+export * from './onboarding/tech/SkillAnalysis';
+export * from './onboarding/tech/TechnicalSection';
+export * from './onboarding/tech/TechnicalIntro';
 export * from './common/Chatbot';
-export * from './common/ProgressTracker';
-export * from './common/LoadingSpinner';
-export * from './common/ErrorBoundary';
-
-// Progress Components
-export * from './ProgressHeader/ProgressHeader';
 
 // Admin Components
 export * from './admin/Dashboard';

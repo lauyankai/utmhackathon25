@@ -28,9 +28,7 @@ const sectionOrder = [
   'security',
   'team',
   'department',
-  'faq',
-  'technical-intro',
-  'technical-section'
+  'faq'
 ];
 
 export const useOnboardingProgress = create<OnboardingProgressState>((set, get) => ({

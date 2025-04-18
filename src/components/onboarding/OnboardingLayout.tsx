@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Drawer } from '@mui/material';
-import { SkillAnalysis } from './SkillAnalysis';
-import { TechnicalSection } from './TechnicalSection';
+import { SkillAnalysis } from './tech/SkillAnalysis';
+import { TechnicalSection } from './tech/TechnicalSection';
 
 const DRAWER_WIDTH = 400;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, Card, CardContent, Chip } from '@mui/material';
 import { Code as CodeIcon, Storage as StorageIcon, Cloud as CloudIcon } from '@mui/icons-material';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 
 export const TechStack: React.FC = () => {
   useScrollCompletion('tech-stack');

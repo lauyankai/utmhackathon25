@@ -1,5 +1,5 @@
 import React from 'react';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 import { Box, Typography, Card, CardContent, Paper, List, ListItem, ListItemIcon,
   ListItemText, Divider } from '@mui/material';
 import {

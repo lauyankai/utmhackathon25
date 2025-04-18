@@ -1,5 +1,5 @@
 import React from 'react';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 import { Box, Typography, Paper, Card, CardContent, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { Work as WorkIcon, Timeline as TimelineIcon, School as SchoolIcon, Star as StarIcon } from '@mui/icons-material';
 

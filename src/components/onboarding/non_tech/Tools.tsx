@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, Card, CardContent, CardHeader, IconButton } from '@mui/material';
 import { Code as CodeIcon, Build as BuildIcon, Terminal as TerminalIcon, BugReport as BugIcon, Cloud as CloudIcon, Storage as StorageIcon } from '@mui/icons-material';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 
 export const Tools: React.FC = () => {
   useScrollCompletion('tools');

@@ -1,23 +1,15 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Box, CssBaseline, Fab } from '@mui/material';
-import { Header, Footer, Chatbot, Team, RoleOverview, FAQ, Security, TechStack, Tools, WelcomeVideo, ProgressHeader } from './components';
+import { Header, Footer, Chatbot, ProgressHeader } from './components';
 import { LoginForm } from './components';
 import { Chat as ChatIcon } from '@mui/icons-material';
-import { CompanyCulture } from './components/onboarding/CompanyCulture';
-import { DailyLife } from './components/onboarding/DailyLife';
-import { Department } from './components/onboarding/Department';
-import { TechnicalLayout } from './components/layout/TechnicalLayout';
-import { TechnicalSection } from './components/onboarding/TechnicalSection';
-import { SkillAnalysis } from './components/onboarding/SkillAnalysis';
-import { AvailableProjects } from './components/onboarding/AvailableProjects';
-import { MyTasks } from './components/onboarding/MyTasks';
-import { Performance } from './components/onboarding/Performance';
 import { useOnboardingProgress } from './store/onboardingProgress';
-import { Welcome } from './components/onboarding/Welcome';
-import { WelcomeLanding } from './components/onboarding/WelcomeLanding';
-import { TechnicalIntro } from './components/onboarding/TechnicalIntro';
 import { Sidebar } from './components/Sidebar/Sidebar';
+import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Team, TechStack, 
+  Tools, Welcome, WelcomeLanding, WelcomeVideo } from './components/onboarding/non_tech';
+import { AvailableProjects, TechnicalIntro, TechnicalSection, SkillAnalysis,
+  MyTasks, Performance } from './components/onboarding/tech';
 
 const ProtectedRoute: React.FC<{ element: React.ReactElement; path: string }> = ({ element, path }) => {
   const canAccess = useOnboardingProgress(state => state.canAccessSection(path.substring(1)));
@@ -195,8 +187,8 @@ const AppContent: React.FC = () => {
             <Route index element={<Navigate to="/technical-section/skill-analysis" replace />} />
             <Route path="skill-analysis" element={<SkillAnalysis onContinue={() => {}} />} />
             <Route path="projects" element={<AvailableProjects />} />
-            <Route path="my-tasks" element={<MyTasks />} />
-            <Route path="performance" element={<Performance />} />
+            <Route path="my-tasks" element={<div>My Tasks</div>} />
+            <Route path="performance" element={<div>Performance</div>} />
           </Routes>
         </TechnicalLayout>
       } />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Paper, Card, CardContent, List, ListItem, ListItemIcon, ListItemText, Alert } from '@mui/material';
 import { Security as SecurityIcon, Lock as LockIcon, Shield as ShieldIcon, VerifiedUser as VerifiedUserIcon } from '@mui/icons-material';
-import { useScrollCompletion } from '../../hooks/useScrollCompletion';
+import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 
 export const Security: React.FC = () => {
   useScrollCompletion('security');

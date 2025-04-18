@@ -34,8 +34,7 @@ export const Sidebar: React.FC = () => {
     { path: '/security', label: 'Security', icon: <SecurityIcon /> },
     { path: '/team', label: 'Team', icon: <TeamIcon /> },
     { path: '/department', label: 'Department', icon: <DepartmentIcon /> },
-    { path: '/faq', label: 'FAQ', icon: <FAQIcon /> },
-    { path: '/technical-section', label: 'Technical Section', icon: <TechnicalIcon /> },
+    { path: '/faq', label: 'FAQ', icon: <FAQIcon /> }
   ];
 
   return (
