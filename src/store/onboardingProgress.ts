@@ -76,7 +76,14 @@ export const useOnboardingProgress = create<OnboardingProgressState>((set, get) 
     const state = get();
     const targetSection = state.sections[sectionId];
     
-    return targetSection !== undefined;
+    if (!targetSection) return false;
+    
+    // If it's the first section, always allow access
+    if (targetSection.order === 0) return true;
+    
+    // For other sections, check if all previous sections are completed
+    const previousSections = sectionOrder.slice(0, targetSection.order);
+    return previousSections.every(section => state.sections[section].completed);
   },
 
   getCurrentSection: () => get().currentSection,
