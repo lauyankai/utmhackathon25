@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Accordion, AccordionSummary, AccordionDetails, Paper, Button } from '@mui/material';
 import { ExpandMore as ExpandMoreIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -8,9 +8,10 @@ import { useScrollCompletion } from '../../../hooks/useScrollCompletion';
 export const FAQ: React.FC = () => {
   const navigate = useNavigate();
   const completeSection = useOnboardingProgress(state => state.completeSection);
+  const completionPercentage = useOnboardingProgress(state => state.getCompletionPercentage());
+  const [viewedQuestions, setViewedQuestions] = useState<Set<number>>(new Set());
 
   const handleNext = () => {
-    completeSection('faq');
     navigate('/technical-intro');
   };
 
@@ -51,6 +52,18 @@ export const FAQ: React.FC = () => {
     }
   ];
 
+  const handleAccordionChange = (index: number) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    if (isExpanded) {
+      const newViewedQuestions = new Set([...viewedQuestions, index]);
+      setViewedQuestions(newViewedQuestions);
+      
+      // If all questions have been viewed, complete the section
+      if (newViewedQuestions.size === faqs.length) {
+        completeSection('faq');
+      }
+    }
+  };
+
   return (
     <Box sx={{ maxWidth: 1200, mx: 'auto', py: 4 }}>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -63,7 +76,11 @@ export const FAQ: React.FC = () => {
 
       <Paper elevation={2} sx={{ mt: 4 }}>
         {faqs.map((faq, index) => (
-          <Accordion key={index} disableGutters>
+          <Accordion 
+            key={index} 
+            disableGutters
+            onChange={handleAccordionChange(index)}
+          >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               sx={{
@@ -91,6 +108,22 @@ export const FAQ: React.FC = () => {
           size="large"
           endIcon={<ArrowForwardIcon />}
           onClick={handleNext}
+          disabled={completionPercentage < 100}
+          sx={{
+            px: 4,
+            py: 1.5,
+            borderRadius: 2,
+            fontSize: '1.1rem',
+            textTransform: 'none',
+            background: 'linear-gradient(90deg, #2563eb 0%, #0ea5e9 100%)',
+            '&:hover': {
+              background: 'linear-gradient(90deg, #1d4ed8 0%, #0284c7 100%)',
+            },
+            '&.Mui-disabled': {
+              background: 'rgba(0, 0, 0, 0.12)',
+              color: 'rgba(0, 0, 0, 0.26)'
+            }
+          }}
         >
           Next: Technical Section
         </Button>
