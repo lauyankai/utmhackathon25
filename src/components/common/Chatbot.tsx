@@ -47,7 +47,7 @@ export const Chatbot: React.FC = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{ height: '500px', display: 'flex', flexDirection: 'column' }}>
+    <Paper elevation={3} sx={{ height: '500px', width: '350px', display: 'flex', flexDirection: 'column', position: 'fixed', bottom: 90, right: 24, zIndex: 1000, borderRadius: 2, overflow: 'hidden' }}>
       <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'white' }}>
         <Typography variant="h6">Onboarding Assistant</Typography>
       </Box>
