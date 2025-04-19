@@ -1,5 +1,11 @@
 # 🚀 AI-Powered Employee Onboarding Platform
 
+## 🔗 Project Resources
+
+[![Poster](https://img.shields.io/badge/Project_Poster-FF0000?style=for-the-badge&logo=adobe&logoColor=white)](https://drive.google.com/drive/folders/1zr9H8x9S6uoK3gwoSfQSqJCtTD7FN8-K?usp=sharing)
+[![Demo Video](https://img.shields.io/badge/Demo_Video-4285F4?style=for-the-badge&logo=google-drive&logoColor=white)](https://drive.google.com/drive/folders/1IW_6R1-VZkp6ejag5rUf9x6r1oo2fM-K?usp=sharing)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://utmhackathon25.vercel.app/)
+
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
