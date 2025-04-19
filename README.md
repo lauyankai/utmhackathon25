@@ -11,7 +11,11 @@ A cutting-edge employee onboarding platform powered by Generative AI that transf
 
 1. Project Poster - [View Poster](https://drive.google.com/drive/folders/1zr9H8x9S6uoK3gwoSfQSqJCtTD7FN8-K?usp=sharing)
 2. Project Video - [Watch Demo](https://drive.google.com/drive/folders/1IW_6R1-VZkp6ejag5rUf9x6r1oo2fM-K?usp=sharing)
-3. Project Prototype - [Try Demo](https://utmhackathon25.vercel.app/)
+3. Project Prototype - [Try Demo](https://utmhackathon25.vercel.app/) User - username & password: any character  Admin - username: admin, password: Admin123
+
+> **Try the demo with:**
+> - User login: any username/password
+> - Admin login: username: `admin`, password: `Admin123`
 
 ## 📋 Overview
 
@@ -150,6 +154,18 @@ VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_key
 VITE_API_URL=your_backend_api_url
 ```
+
+## 👥 Login Credentials
+
+### User Account
+- **Username**: Any character
+- **Password**: Any character
+- **Access**: Employee onboarding features and task management
+
+### Admin Account
+- **Username**: `admin`
+- **Password**: `Admin123`
+- **Access**: Full administrative features and management dashboard
 
 ## 🤝 Contributing
 
