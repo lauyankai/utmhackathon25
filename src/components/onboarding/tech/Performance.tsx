@@ -300,7 +300,7 @@ export const Performance: React.FC = () => {
       </Paper>
 
       {/* Growth Areas */}
-      <Paper sx={{ p: 3 }} elevation={2}>
+      <Paper sx={{ p: 3, mb: 3 }} elevation={2}>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
           <SpeedIcon color="primary" sx={{ mr: 1 }} />
           <Typography variant="h6">Recommended Growth Areas</Typography>
@@ -315,6 +315,41 @@ export const Performance: React.FC = () => {
               variant="outlined"
             />
           ))}
+        </Box>
+      </Paper>
+
+      {/* Completion Message */}
+      <Paper 
+        sx={{ 
+          p: 4, 
+          textAlign: 'center',
+          bgcolor: 'success.light',
+          color: 'success.contrastText'
+        }} 
+        elevation={2}
+      >
+        <Typography variant="h5" gutterBottom sx={{ fontWeight: 500 }}>
+          🎉 Performance Analysis Complete!
+        </Typography>
+        <Typography variant="body1" paragraph>
+          Your performance analysis has been successfully completed and will be sent to the company for review.
+        </Typography>
+        <Typography variant="body1" paragraph>
+          You will receive an official email shortly with information about your assigned team and role.
+          Thank you for completing the technical assessment process!
+        </Typography>
+        <Box sx={{ mt: 4, p: 3, bgcolor: 'rgba(255, 255, 255, 0.1)', borderRadius: 2 }}>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 500 }}>
+            🌟 Welcome to Our Growing Team!
+          </Typography>
+          <Typography variant="body1" paragraph>
+            We're excited about the prospect of having you join our team! Your skills and dedication shown throughout 
+            the assessment process have been impressive.
+          </Typography>
+          <Typography variant="body1">
+            Get ready for an amazing journey where you'll have the opportunity to work on challenging projects, 
+            grow your skills, and make a real impact alongside talented colleagues.
+          </Typography>
         </Box>
       </Paper>
     </Box>
