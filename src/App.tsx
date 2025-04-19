@@ -7,7 +7,7 @@ import { Chat as ChatIcon } from '@mui/icons-material';
 import { useOnboardingProgress } from './store/onboardingProgress';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Team, TechStack, 
-  Tools, Welcome, WelcomeLanding, WelcomeVideo } from './components/onboarding/non_tech';
+  Tools, Welcome, WelcomeVideo } from './components/onboarding/non_tech';
 import { AvailableProjects, TechnicalIntro, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
@@ -99,28 +99,12 @@ const AppContent: React.FC = () => {
     return localStorage.getItem('isAdmin') === 'true';
   });
   
-  const [hasStartedOnboarding, setHasStartedOnboarding] = React.useState(() => {
-    return localStorage.getItem('hasStartedOnboarding') === 'true';
-  });
-  
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
   }, [isAuthenticated]);
-  
-  useEffect(() => {
-    // Listen for changes to hasStartedOnboarding in localStorage
-    const handleStorageChange = () => {
-      setHasStartedOnboarding(localStorage.getItem('hasStartedOnboarding') === 'true');
-    };
-    
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
 
   const handleLogin = (email: string, password: string) => {
     // Basic admin authentication
@@ -129,16 +113,12 @@ const AppContent: React.FC = () => {
       setIsAdmin(true);
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('isAdmin', 'true');
-      localStorage.removeItem('hasStartedOnboarding');
-      setHasStartedOnboarding(false);
       navigate('/admin/dashboard');
     } else {
       setIsAuthenticated(true);
       setIsAdmin(false);
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('isAdmin', 'false');
-      localStorage.removeItem('hasStartedOnboarding');
-      setHasStartedOnboarding(false);
       // Force navigation to welcome-video for regular users
       setTimeout(() => {
         navigate('/welcome-video', { replace: true });
