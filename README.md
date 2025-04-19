@@ -11,7 +11,7 @@ A cutting-edge employee onboarding platform powered by Generative AI that transf
 
 1. Project Poster - [View Poster](https://drive.google.com/drive/folders/1zr9H8x9S6uoK3gwoSfQSqJCtTD7FN8-K?usp=sharing)
 2. Project Video - [Watch Demo](https://drive.google.com/drive/folders/1IW_6R1-VZkp6ejag5rUf9x6r1oo2fM-K?usp=sharing)
-3. Project Prototype - [Try Demo](https://utmhackathon25.vercel.app/) User - username & password: any character  Admin - username: admin, password: Admin123
+3. Project Prototype - [Try Demo](https://utmhackathon25.vercel.app/) 
 
 > **Try the demo with:**
 > - User login: any username/password
