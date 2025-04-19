@@ -1,54 +1,126 @@
-# React + TypeScript + Vite　ー
+# AI-Powered Employee Onboarding Platform
 
-This template provide a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, intelligent onboarding platform that streamlines the employee integration process and facilitates optimal team placement through AI-driven insights.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This platform revolutionizes the traditional onboarding experience by providing a comprehensive, automated system that guides new employees through their company introduction while gathering valuable insights for optimal team placement.
 
-## Expanding the ESLint configuration
+### Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Personalized Onboarding Journey**
+  - Company culture introduction
+  - Role-specific information
+  - Tools and resources familiarization
+  - Interactive learning modules
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **AI-Powered Task Management**
+  - Skill-based task recommendations
+  - Project suggestions based on user profile
+  - Performance analysis and tracking
+  - Automated progress monitoring
+
+- **Smart Team Placement**
+  - AI-driven skill assessment
+  - Performance analytics
+  - Team compatibility analysis
+  - Data-driven placement recommendations
+
+## Technical Architecture
+
+Our system is built using modern technologies to ensure scalability, performance, and reliability:
+
+### Frontend
+- **React + Vite**
+  - Modern UI framework with TypeScript support
+  - Fast development experience with HMR
+  - Optimized build performance
+- Deployed on **Vercel** for optimal delivery
+
+### Backend
+- **Node.js + Express.js**
+  - RESTful API architecture
+  - Robust server-side processing
+  - Efficient data handling
+
+### Authentication
+- **Supabase**
+  - Secure user authentication
+  - Role-based access control
+  - Session management
+
+### AI Pipeline
+- **Hugging Face Transformers (RAG pipeline)**
+  - Document chunking for processing
+  - Advanced embeddings generation
+  - Vector retrieval system
+
+### Databases
+- **PostgreSQL**
+  - Primary data storage
+  - User information
+  - Progress tracking
+  - Performance metrics
+
+- **Chroma**
+  - Vector database
+  - AI model data storage
+  - Efficient similarity search
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher)
+- PostgreSQL
+- Supabase account
+- Chroma DB setup
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone [repository-url]
+cd [project-directory]
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies
+```bash
+npm install
 ```
+
+3. Configure environment variables
+```bash
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Start the development server
+```bash
+npm run dev
+```
+
+## Environment Variables
+
+Create a `.env` file with the following variables:
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_key
+VITE_API_URL=your_backend_api_url
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+Project Link: [https://github.com/lauyankai/utmhackathon25](https://github.com/lauyankai/utmhackathon25)
