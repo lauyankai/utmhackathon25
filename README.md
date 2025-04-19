@@ -13,7 +13,7 @@ An intelligent employee onboarding and team placement platform that leverages AI
 
 Our platform revolutionizes the traditional onboarding and team placement process through AI-driven insights:
 
-1. 📄 **Resume Analysis**: AI automatically analyzes new hire resumes to understand their skills, experience, and potential
+1. 📄 **Skill Analysis**: AI automatically analyzes new hire skills and experience from their interview data
 2. 🎯 **Personalized Tasks**: Generates tailored onboarding tasks based on the candidate's profile
 3. 📊 **Performance Tracking**: Monitors task completion and assesses performance
 4. 🤝 **Smart Team Matching**: Recommends optimal team placement based on skills and performance
@@ -22,7 +22,7 @@ Our platform revolutionizes the traditional onboarding and team placement proces
 ### ✨ Key Features
 
 - **🧠 AI-Powered Skill Assessment**
-  - 📄 Automated resume analysis and skill extraction
+  - 📄 Automated skill analysis from interview data
   - 🎯 Skill gap identification
   - 💡 Personalized development recommendations
   - 📊 Comprehensive skill profiling
@@ -42,9 +42,9 @@ Our platform revolutionizes the traditional onboarding and team placement proces
 ## 🔄 How It Works
 
 1. **Initial Assessment** 📋
-   - New hire uploads resume
-   - AI analyzes skills and experience
-   - System generates personalized onboarding plan
+   - AI analyzes existing interview data and resume
+   - System evaluates candidate's skill profile
+   - Generates personalized onboarding plan
 
 2. **Onboarding Journey** 🛤️
    - Custom tasks based on skill profile
@@ -87,7 +87,7 @@ Our system is built using modern technologies to ensure scalability, performance
 
 ### 🧠 AI Pipeline
 - **🤗 Hugging Face Transformers (RAG pipeline)**
-  - Resume parsing and analysis
+  - Interview data and resume analysis
   - Skill extraction and classification
   - Performance prediction
   - Team compatibility analysis
@@ -101,7 +101,7 @@ Our system is built using modern technologies to ensure scalability, performance
 
 - **🎨 Chroma**
   - Vector embeddings for skills
-  - Resume analysis data
+  - Interview data analysis
   - AI model storage
   - Similarity matching
 
