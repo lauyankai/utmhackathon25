@@ -146,7 +146,7 @@ export const WelcomeLanding: React.FC = () => {
                   localStorage.setItem('hasStartedOnboarding', 'true');
                   // We need to manually trigger the storage event for the same window
                   window.dispatchEvent(new Event('storage'));
-                  navigate('/company-culture');
+                  navigate('/welcome-video');
                 }}
                 sx={{
                   px: 4,

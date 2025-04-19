@@ -8,6 +8,7 @@ import { useOnboardingProgress } from './store/onboardingProgress';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { CompanyCulture, DailyLife, Department, FAQ, RoleOverview, Security, Team, TechStack, 
   Tools, Welcome, WelcomeVideo } from './components/onboarding/non_tech';
+import { WelcomeLanding } from './components/onboarding/non_tech/WelcomeLanding';
 import { AvailableProjects, TechnicalIntro, SkillAnalysis,
   MyTasks, Performance } from './components/onboarding/tech';
 import { TechnicalLayout } from './components/layout/TechnicalLayout';
@@ -119,10 +120,14 @@ const AppContent: React.FC = () => {
       setIsAdmin(false);
       localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('isAdmin', 'false');
-      // Force navigation to welcome-video for regular users
-      setTimeout(() => {
+      
+      // Check if this is the first login
+      const hasStartedOnboarding = localStorage.getItem('hasStartedOnboarding');
+      if (!hasStartedOnboarding) {
+        navigate('/welcome-landing', { replace: true });
+      } else {
         navigate('/welcome-video', { replace: true });
-      }, 0);
+      }
     }
   };
 
@@ -143,8 +148,9 @@ const AppContent: React.FC = () => {
   return (
     <Routes>
       {/* Main Onboarding Routes */}
-      <Route path="/" element={<MainLayout><Navigate to={isAdmin ? "/admin/dashboard" : "/welcome-video"} replace /></MainLayout>} />
+      <Route path="/" element={<MainLayout><Navigate to={isAdmin ? "/admin/dashboard" : "/welcome-landing"} replace /></MainLayout>} />
       <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+      <Route path="/welcome-landing" element={<WelcomeLanding />} />
       <Route path="/welcome" element={<MainLayout><ProtectedRoute path="/welcome" element={<Welcome />} /></MainLayout>} />
       <Route path="/welcome-video" element={<MainLayout><ProtectedRoute path="/welcome-video" element={<WelcomeVideo />} /></MainLayout>} />
       <Route path="/company-culture" element={<MainLayout><ProtectedRoute path="/company-culture" element={<CompanyCulture />} /></MainLayout>} />
