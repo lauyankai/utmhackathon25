@@ -123,7 +123,18 @@ export const WelcomeLanding: React.FC = () => {
                 fontWeight="bold"
                 sx={{ mb: 2, color: 'white' }}
               >
-                Welcome to NexGen
+                Welcome to Wello
+              </Typography>
+              
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  mb: 2, 
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  fontWeight: 'medium'
+                }}
+              >
+                — an AI-powered Smart Onboarding Assistant that helps new employees connect faster and saves HR teams time.
               </Typography>
               
               <Typography 
