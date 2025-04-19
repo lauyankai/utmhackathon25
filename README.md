@@ -7,31 +7,60 @@
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-181818?style=flat&logo=supabase&logoColor=white)](https://supabase.com/)
 
-A modern, intelligent onboarding platform that streamlines the employee integration process and facilitates optimal team placement through AI-driven insights.
+An intelligent employee onboarding and team placement platform that leverages AI to analyze new hire skills, automate the onboarding process, and make data-driven team placement recommendations.
 
 ## 📋 Overview
 
-This platform revolutionizes the traditional onboarding experience by providing a comprehensive, automated system that guides new employees through their company introduction while gathering valuable insights for optimal team placement.
+Our platform revolutionizes the traditional onboarding and team placement process through AI-driven insights:
+
+1. 📄 **Resume Analysis**: AI automatically analyzes new hire resumes to understand their skills, experience, and potential
+2. 🎯 **Personalized Tasks**: Generates tailored onboarding tasks based on the candidate's profile
+3. 📊 **Performance Tracking**: Monitors task completion and assesses performance
+4. 🤝 **Smart Team Matching**: Recommends optimal team placement based on skills and performance
+5. 📈 **Company Insights**: Provides detailed analytics to management for informed decision-making
 
 ### ✨ Key Features
 
-- **🎯 Personalized Onboarding Journey**
-  - 🏢 Company culture introduction
-  - 👥 Role-specific information
-  - 🛠️ Tools and resources familiarization
-  - 📚 Interactive learning modules
+- **🧠 AI-Powered Skill Assessment**
+  - 📄 Automated resume analysis and skill extraction
+  - 🎯 Skill gap identification
+  - 💡 Personalized development recommendations
+  - 📊 Comprehensive skill profiling
 
-- **🤖 AI-Powered Task Management**
-  - 📊 Skill-based task recommendations
-  - 💡 Project suggestions based on user profile
-  - 📈 Performance analysis and tracking
-  - 🔄 Automated progress monitoring
+- **🤖 Intelligent Task Management**
+  - 📋 Custom task generation based on skill profile
+  - 📈 Real-time performance tracking
+  - 🎓 Adaptive learning paths
+  - ✅ Progress validation and assessment
 
-- **🎯 Smart Team Placement**
-  - 🧠 AI-driven skill assessment
-  - 📊 Performance analytics
-  - 🤝 Team compatibility analysis
-  - 📑 Data-driven placement recommendations
+- **🎯 Data-Driven Team Placement**
+  - 🔄 Real-time performance analysis
+  - 👥 Team compatibility matching
+  - 📊 Skill-based team recommendations
+  - 📑 Detailed placement reports for management
+
+## 🔄 How It Works
+
+1. **Initial Assessment** 📋
+   - New hire uploads resume
+   - AI analyzes skills and experience
+   - System generates personalized onboarding plan
+
+2. **Onboarding Journey** 🛤️
+   - Custom tasks based on skill profile
+   - Interactive learning modules
+   - Progress tracking and performance assessment
+
+3. **Team Matching** 🤝
+   - AI processes performance data
+   - Analyzes team compatibility
+   - Generates placement recommendations
+
+4. **Management Insights** 📊
+   - Detailed performance reports
+   - Team placement recommendations
+   - Skill gap analysis
+   - ROI metrics
 
 ## 🏗️ Technical Architecture
 
@@ -58,21 +87,23 @@ Our system is built using modern technologies to ensure scalability, performance
 
 ### 🧠 AI Pipeline
 - **🤗 Hugging Face Transformers (RAG pipeline)**
-  - Document chunking for processing
-  - Advanced embeddings generation
-  - Vector retrieval system
+  - Resume parsing and analysis
+  - Skill extraction and classification
+  - Performance prediction
+  - Team compatibility analysis
 
 ### 💾 Databases
 - **🐘 PostgreSQL**
-  - Primary data storage
-  - User information
-  - Progress tracking
+  - User profiles and progress
+  - Team and company data
   - Performance metrics
+  - Assessment results
 
 - **🎨 Chroma**
-  - Vector database
-  - AI model data storage
-  - Efficient similarity search
+  - Vector embeddings for skills
+  - Resume analysis data
+  - AI model storage
+  - Similarity matching
 
 ## 🚀 Getting Started
 
@@ -134,5 +165,5 @@ Project Link: [https://github.com/lauyankai/utmhackathon25](https://github.com/l
 
 ---
 <div align="center">
-Made with ❤️ for better employee onboarding
+Made with ❤️ for better employee onboarding and team placement
 </div>
