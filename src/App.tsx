@@ -35,9 +35,8 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   useScrollToTop();
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('hasStartedOnboarding');
-    localStorage.removeItem('isAdmin');
+    // Clear all authentication and state data
+    localStorage.clear(); // This will clear all localStorage items
     navigate('/login');
   };
 
@@ -105,6 +104,7 @@ const AppContent: React.FC = () => {
   });
   
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('isAuthenticated', isAuthenticated.toString());
@@ -127,15 +127,22 @@ const AppContent: React.FC = () => {
     if (email === 'admin' && password === 'Admin123') {
       setIsAuthenticated(true);
       setIsAdmin(true);
+      localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('isAdmin', 'true');
       localStorage.removeItem('hasStartedOnboarding');
       setHasStartedOnboarding(false);
+      navigate('/admin/dashboard');
     } else {
       setIsAuthenticated(true);
       setIsAdmin(false);
+      localStorage.setItem('isAuthenticated', 'true');
       localStorage.setItem('isAdmin', 'false');
       localStorage.removeItem('hasStartedOnboarding');
       setHasStartedOnboarding(false);
+      // Force navigation to welcome-video for regular users
+      setTimeout(() => {
+        navigate('/welcome-video', { replace: true });
+      }, 0);
     }
   };
 
@@ -145,16 +152,6 @@ const AppContent: React.FC = () => {
         <CssBaseline />
         <LoginForm onLogin={handleLogin} />
       </Box>
-    );
-  }
-  
-  // Show welcome landing page if onboarding hasn't started yet
-  if (!hasStartedOnboarding && !isAdmin) {
-    // Handle any route when onboarding hasn't started yet
-    return (
-      <Routes>
-        <Route path="*" element={<WelcomeLanding />} />
-      </Routes>
     );
   }
   
