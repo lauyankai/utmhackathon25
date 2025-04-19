@@ -35,11 +35,12 @@ class HuggingFaceClient {
     
     this.baseUrl = 'https://api-inference.huggingface.co/models';
     
-    // Restore the original model as requested
-    this.model = 'HuggingFaceH4/zephyr-7b-alpha';
+    // Change to a Mistral AI model
+    this.model = 'mistralai/Mistral-7B-Instruct-v0.1';
     
     // Keep fallback models
     this.fallbackModels = [
+      'mistralai/Mixtral-8x7B-Instruct-v0.1',
       'google/flan-t5-xl',
       'microsoft/DialoGPT-medium'
     ];
@@ -200,30 +201,13 @@ class HuggingFaceClient {
    * @returns {string} The formatted prompt
    */
   formatPrompt(userMessage) {
-    // Special case for Zephyr model - it requires a specific format
-    if (this.model.includes('zephyr')) {
-      // Correct format for Zephyr models
-      return {
-        text: `<|system|>
-You are a helpful onboarding assistant for a tech company. 
-You answer questions about the company, its policies, tools, culture, and help new employees get oriented.
-Please respond in a friendly, concise, and helpful way.
-<|user|>
-${userMessage}
-<|assistant|>`
-      };
-    } else if (this.model.includes('mistral')) {
-      // Format for Mistral models
-      return `<s>[INST] You are a helpful onboarding assistant for a tech company. 
-You answer questions about the company, its policies, tools, culture, and help new employees get oriented.
-Please respond in a friendly, concise, and helpful way.
-
-User question: ${userMessage} [/INST]</s>`;
-    } else {
-      // Default format for other models
-      return `You are a helpful assistant answering: ${userMessage}`;
+    if (this.model.includes('mistral') || this.model.includes('mixtral')) {
+      return `<s>[INST] ${userMessage} [/INST]`;
     }
+  
+    return userMessage;
   }
+  
 
   /**
    * Extract the reply from the model's response
@@ -252,8 +236,7 @@ User question: ${userMessage} [/INST]</s>`;
           
           // Extract based on model
           if (model.includes('mistral')) {
-            const pattern = /\[\/INST\](.*?)(?:<\/s>|$)/s;
-            const match = text.match(pattern);
+            const match = text.match(/\[\/INST\](.*?)(<\/s>|$)/s);
             return match && match[1] ? match[1].trim() : text.trim();
           }
           
