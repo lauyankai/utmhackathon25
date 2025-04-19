@@ -151,6 +151,18 @@ VITE_SUPABASE_ANON_KEY=your_supabase_key
 VITE_API_URL=your_backend_api_url
 ```
 
+## 👥 Login Credentials
+
+### User Account
+- **Username**: Any character
+- **Password**: Any character
+- **Access**: Employee onboarding features and task management
+
+### Admin Account
+- **Username**: `admin`
+- **Password**: `Admin123`
+- **Access**: Full administrative features and management dashboard
+
 ## 🤝 Contributing
 
 1. Fork the repository
