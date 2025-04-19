@@ -7,7 +7,7 @@
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-181818?style=flat&logo=supabase&logoColor=white)](https://supabase.com/)
 
-An intelligent employee onboarding and team placement platform that leverages AI to analyze new hire skills, automate the onboarding process, and make data-driven team placement recommendations.
+A cutting-edge employee onboarding platform powered by Generative AI that transforms the hiring process. Our system intelligently analyzes candidate skills, generates personalized learning paths, and provides AI-driven team placement recommendations through natural language interactions.
 
 1. Project Poster - [View Poster](https://drive.google.com/drive/folders/1zr9H8x9S6uoK3gwoSfQSqJCtTD7FN8-K?usp=sharing)
 2. Project Video - [Watch Demo](https://drive.google.com/drive/folders/1IW_6R1-VZkp6ejag5rUf9x6r1oo2fM-K?usp=sharing)
@@ -15,60 +15,60 @@ An intelligent employee onboarding and team placement platform that leverages AI
 
 ## 📋 Overview
 
-Our platform revolutionizes the traditional onboarding and team placement process through AI-driven insights:
+Our platform leverages the power of Generative AI to revolutionize the employee onboarding experience:
 
-1. 📄 **Skill Analysis**: AI automatically analyzes new hire skills and experience from their interview data
-2. 🎯 **Personalized Tasks**: Generates tailored onboarding tasks based on the candidate's profile
-3. 📊 **Performance Tracking**: Monitors task completion and assesses performance
-4. 🤝 **Smart Team Matching**: Recommends optimal team placement based on skills and performance
-5. 📈 **Company Insights**: Provides detailed analytics to management for informed decision-making
+1. 🤖 **GenAI-Powered Analysis**: Advanced language models analyze interview transcripts and resumes to understand candidate capabilities
+2. 💡 **Intelligent Task Generation**: AI automatically creates personalized onboarding content and tasks
+3. 🗣️ **Natural Language Interface**: Conversational AI provides intuitive guidance throughout the onboarding process
+4. 🎯 **Smart Team Matching**: AI generates detailed compatibility analysis and team placement suggestions
+5. 📊 **Predictive Analytics**: Machine learning models provide insights into future performance and team dynamics
 
 ### ✨ Key Features
 
-- **🧠 AI-Powered Skill Assessment**
-  - 📄 Automated skill analysis from interview data
-  - 🎯 Skill gap identification
-  - 💡 Personalized development recommendations
-  - 📊 Comprehensive skill profiling
+- **🧠 Advanced GenAI Capabilities**
+  - 🔍 Natural language understanding of candidate profiles
+  - 💭 Contextual task generation and adaptation
+  - 🤝 Intelligent conversation handling
+  - 📝 Automated feedback generation
 
-- **🤖 Intelligent Task Management**
-  - 📋 Custom task generation based on skill profile
-  - 📈 Real-time performance tracking
-  - 🎓 Adaptive learning paths
-  - ✅ Progress validation and assessment
+- **🤖 AI-Driven Learning Experience**
+  - 🎯 Dynamic content generation
+  - 🔄 Real-time adaptation to user responses
+  - 📚 Personalized learning materials
+  - ✨ Interactive AI-guided sessions
 
-- **🎯 Data-Driven Team Placement**
-  - 🔄 Real-time performance analysis
-  - 👥 Team compatibility matching
-  - 📊 Skill-based team recommendations
-  - 📑 Detailed placement reports for management
+- **🎯 Intelligent Team Placement**
+  - 🧮 Advanced matching algorithms
+  - 🤝 Team dynamics prediction
+  - 📊 Skills compatibility analysis
+  - 📈 Growth potential assessment
 
 ## 🔄 How It Works
 
-1. **Initial Assessment** 📋
-   - AI analyzes existing interview data and resume
-   - System evaluates candidate's skill profile
-   - Generates personalized onboarding plan
+1. **AI Analysis** 📋
+   - Natural language processing of interview data
+   - Contextual understanding of skills and experience
+   - Generation of comprehensive candidate profile
 
-2. **Onboarding Journey** 🛤️
-   - Custom tasks based on skill profile
-   - Interactive learning modules
-   - Progress tracking and performance assessment
+2. **Personalized Journey** 🛤️
+   - AI generates custom learning content
+   - Interactive conversations guide progress
+   - Dynamic task adaptation based on performance
 
 3. **Team Matching** 🤝
-   - AI processes performance data
-   - Analyzes team compatibility
-   - Generates placement recommendations
+   - GenAI processes interaction data
+   - Generates team compatibility insights
+   - Provides detailed placement rationale
 
 4. **Management Insights** 📊
-   - Detailed performance reports
-   - Team placement recommendations
-   - Skill gap analysis
-   - ROI metrics
+   - AI-generated performance predictions
+   - Team dynamics analysis
+   - Automated growth recommendations
+   - ROI projections
 
 ## 🏗️ Technical Architecture
 
-Our system is built using modern technologies to ensure scalability, performance, and reliability:
+Our system leverages cutting-edge AI technologies:
 
 ### 🎨 Frontend
 - **⚛️ React + ⚡ Vite**
@@ -80,7 +80,7 @@ Our system is built using modern technologies to ensure scalability, performance
 ### 🔧 Backend
 - **📦 Node.js + Express.js**
   - RESTful API architecture
-  - Robust server-side processing
+  - Real-time AI processing
   - Efficient data handling
 
 ### 🔐 Authentication
@@ -90,24 +90,24 @@ Our system is built using modern technologies to ensure scalability, performance
   - Session management
 
 ### 🧠 AI Pipeline
-- **🤗 Hugging Face Transformers (RAG pipeline)**
-  - Interview data and resume analysis
-  - Skill extraction and classification
-  - Performance prediction
-  - Team compatibility analysis
+- **🤗 Hugging Face Transformers**
+  - Large Language Models for natural interactions
+  - RAG pipeline for contextual understanding
+  - Advanced text generation capabilities
+  - Neural search for team matching
 
 ### 💾 Databases
 - **🐘 PostgreSQL**
-  - User profiles and progress
+  - User profiles and interactions
   - Team and company data
   - Performance metrics
-  - Assessment results
+  - AI-generated insights
 
 - **🎨 Chroma**
-  - Vector embeddings for skills
-  - Interview data analysis
-  - AI model storage
-  - Similarity matching
+  - Neural embeddings storage
+  - Semantic search capabilities
+  - AI model versioning
+  - Vector similarity matching
 
 ## 🚀 Getting Started
 
