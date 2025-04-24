@@ -9,8 +9,7 @@ interface Message {
   timestamp: Date;
 }
 
-// API configuration - easy to change for testing
-const API_URL = 'http://localhost:8080/api/chat';
+const API_URL = 'https://utmhackathon25.vercel.app/';
 // Alternative with CORS proxy if needed
 // const API_URL = 'https://cors-anywhere.herokuapp.com/http://localhost:8080/api/chat';
 
