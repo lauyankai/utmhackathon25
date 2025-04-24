@@ -9,8 +9,7 @@ interface Message {
   timestamp: Date;
 }
 
-// Configuration - adjust these values as needed
-const API_URL = 'http://localhost:3002/api/chat';
+const API_URL = 'https://utmhackathon25.vercel.app/';
 
 export const ChatbotWithAPI: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
