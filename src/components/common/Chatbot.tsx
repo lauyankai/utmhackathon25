@@ -9,7 +9,7 @@ interface Message {
   timestamp: Date;
 }
 
-const API_URL = 'https://utmhackathon25.vercel.app/';
+const API_URL = 'https://huggingface.co/api/models';
 // Alternative with CORS proxy if needed
 // const API_URL = 'https://cors-anywhere.herokuapp.com/http://localhost:8080/api/chat';
 
